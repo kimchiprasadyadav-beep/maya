@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop — Maya Bohemian Maternity Wear</title>
+    <meta name="description" content="Shop Maya's collection of bohemian maternity wear — dresses, tops, co-ord sets, and nursing wear.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FAF6F1; --warm-white: #FFF9F2; --sand: #E8DDD3;
+            --terracotta: #C4774C; --terracotta-light: rgba(196,119,76,0.1);
+            --sage: #8B9E7E; --sage-light: rgba(139,158,126,0.1);
+            --charcoal: #2C2C2C; --text: #3D3530; --text-muted: #8B7E74; --gold: #B8955A;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        /* Page header */
+        .page-header { text-align: center; padding: 3rem 2rem 1rem; }
+        .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; }
+        .page-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* Category tabs */
+        .category-tabs { display: flex; justify-content: center; gap: 1rem; padding: 1.5rem 2rem; flex-wrap: wrap; }
+        .cat-tab { padding: 0.6rem 1.5rem; border: 1.5px solid var(--sand); background: transparent; font-family: 'Outfit', sans-serif; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 100px; transition: all 0.3s; color: var(--text-muted); }
+        .cat-tab:hover, .cat-tab.active { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
+
+        /* Sort bar */
+        .sort-bar { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); }
+        .sort-bar select { font-family: 'Outfit', sans-serif; padding: 0.4rem 1rem; border: 1px solid var(--sand); background: white; font-size: 0.8rem; color: var(--text); border-radius: 4px; }
+
+        /* Product grid */
+        .products-grid { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .product-card { cursor: pointer; transition: transform 0.3s; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+        .product-card:hover { transform: translateY(-4px); }
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
+        .product-card:nth-child(7) { animation-delay: 0.35s; }
+        .product-card:nth-child(8) { animation-delay: 0.4s; }
+        .product-card:nth-child(n+9) { animation-delay: 0.45s; }
+
+        .product-img { aspect-ratio: 3/4; border-radius: 8px; margin-bottom: 1rem; position: relative; overflow: hidden; background: var(--sand); }
+        .product-img img { transition: transform 0.5s ease; }
+        .product-card:hover .product-img img { transform: scale(1.05); }
+        .product-badge { position: absolute; top: 1rem; left: 1rem; background: var(--terracotta); color: white; font-size: 0.65rem; padding: 0.3rem 0.8rem; border-radius: 100px; letter-spacing: 1px; text-transform: uppercase; z-index: 2; }
+        .product-badge.sage { background: var(--sage); }
+        .product-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 0.2rem; }
+        .product-meta { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.3rem; }
+        .price { color: var(--text-muted); font-size: 0.9rem; }
+        .price .original { text-decoration: line-through; margin-right: 0.5rem; opacity: 0.5; }
+        .product-colors { display: flex; gap: 0.4rem; margin-top: 0.5rem; }
+        .color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--sand); cursor: pointer; }
+
+        /* Quick add */
+        .quick-add { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(44,44,44,0.9); color: white; text-align: center; padding: 0.8rem; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; transform: translateY(100%); transition: transform 0.3s; cursor: pointer; z-index: 2; }
+        .product-card:hover .quick-add { transform: translateY(0); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Footer */
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; } footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232,221,211,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232,221,211,0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232,221,211,0.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="announcement">Free shipping on orders above ₹1,999 · Handcrafted with love 🌿</div>
+
+<nav>
+    <ul class="nav-links">
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="sustainability.html">Values</a></li>
+        <li><a href="faq.html">Help</a></li>
+    </ul>
+    <a href="index.html" class="brand">ma<span>ya</span></a>
+    <div class="nav-icons">
+        <a href="#" title="Search">🔍</a>
+        <a href="#" title="Account">👤</a>
+        <a href="#" title="Cart">🛒</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Shop the Collection</h1>
+    <p>Bohemian maternity wear crafted with love, designed to grow with you</p>
+</div>
+
+<div class="category-tabs">
+    <button class="cat-tab active" data-cat="all">All</button>
+    <button class="cat-tab" data-cat="dresses">Dresses</button>
+    <button class="cat-tab" data-cat="tops">Tops & Kurtis</button>
+    <button class="cat-tab" data-cat="coords">Co-ord Sets</button>
+    <button class="cat-tab" data-cat="nursing">Nursing Wear</button>
+</div>
+
+<div class="sort-bar">
+    <span id="product-count">16 products</span>
+    <select id="sort-select">
+        <option>Sort by: Featured</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest First</option>
+    </select>
+</div>
+
+<div class="products-grid" id="products-grid">
+
+    <!-- DRESSES -->
+    <div class="product-card" data-cat="dresses" data-price="2499">
+        <div class="product-img">
+            <span class="product-badge">New</span>
+            <img src="https://plus.unsplash.com/premium_photo-1661476550436-a5546db2c271?w=400&q=80&fit=crop&crop=center" alt="The Wanderer Dress">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Dress · Organic Cotton</div>
+        <h4>The Wanderer Dress</h4>
+        <p class="price">₹2,499</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#FAF6F1"></div>
+            <div class="color-dot" style="background:#C4774C"></div>
+            <div class="color-dot" style="background:#8B9E7E"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="dresses" data-price="2999">
+        <div class="product-img">
+            <span class="product-badge">Bestseller</span>
+            <img src="https://plus.unsplash.com/premium_photo-1695792938662-8a28bda660ff?w=400&q=80&fit=crop&crop=center" alt="Sahara Maxi Dress">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Dress · Linen Blend</div>
+        <h4>Sahara Maxi Dress</h4>
+        <p class="price">₹2,999</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#D4A574"></div>
+            <div class="color-dot" style="background:#2C2C2C"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="dresses" data-price="3499">
+        <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1697999336363-1396d83be409?w=400&q=80&fit=crop&crop=center" alt="Vrindavan Midi">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Dress · Block Print Cotton</div>
+        <h4>Vrindavan Midi Dress</h4>
+        <p class="price">₹3,499</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#8B9E7E"></div>
+            <div class="color-dot" style="background:#B8955A"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="dresses" data-price="4499">
+        <div class="product-img">
+            <span class="product-badge sage">Premium</span>
+            <img src="https://images.unsplash.com/photo-1595684595530-095b61d7def9?w=400&q=80&fit=crop&crop=center" alt="Agni Wrap Dress">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Dress · Chanderi Silk</div>
+        <h4>Agni Wrap Dress</h4>
+        <p class="price">₹4,499</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#C4774C"></div>
+            <div class="color-dot" style="background:#8B4513"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="dresses" data-price="1799">
+        <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1718347476976-ff404fb6da36?w=400&q=80&fit=crop&crop=center" alt="Breeze Tier Dress">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Dress · Soft Cotton</div>
+        <h4>Breeze Tier Dress</h4>
+        <p class="price"><span class="original">₹2,299</span>₹1,799</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#FAF6F1"></div>
+            <div class="color-dot" style="background:#D4C4B0"></div>
+        </div>
+    </div>
+
+    <!-- TOPS & KURTIS -->
+    <div class="product-card" data-cat="tops" data-price="1599">
+        <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1718737654958-9b49716693bb?w=400&q=80&fit=crop&crop=center" alt="Sage Wrap Top">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Top · Organic Cotton</div>
+        <h4>Sage Wrap Top</h4>
+        <p class="price"><span class="original">₹1,999</span>₹1,599</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#8B9E7E"></div>
+            <div class="color-dot" style="background:#C4774C"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="tops" data-price="1899">
+        <div class="product-img">
+            <span class="product-badge">New</span>
+            <img src="https://plus.unsplash.com/premium_photo-1661369652778-d79f3e6cf4d3?w=400&q=80&fit=crop&crop=center" alt="Earthy Peplum Kurti">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Kurti · Hand Embroidered</div>
+        <h4>Earthy Peplum Kurti</h4>
+        <p class="price">₹1,899</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#D4A574"></div>
+            <div class="color-dot" style="background:#FAF6F1"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="tops" data-price="1499">
+        <div class="product-img">
+            <img src="https://plus.unsplash.com/premium_photo-1661380487022-4aac8ec31625?w=400&q=80&fit=crop&crop=center" alt="Bloom Button-Down">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Top · Linen</div>
+        <h4>Bloom Button-Down</h4>
+        <p class="price">₹1,499</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#FAF6F1"></div>
+            <div class="color-dot" style="background:#8B9E7E"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="tops" data-price="1299">
+        <div class="product-img">
+            <img src="https://plus.unsplash.com/premium_photo-1661488657678-e5de468bd027?w=400&q=80&fit=crop&crop=center" alt="Cloud Tee">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Top · Bamboo Cotton</div>
+        <h4>Cloud Everyday Tee</h4>
+        <p class="price">₹1,299</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#E8DDD3"></div>
+            <div class="color-dot" style="background:#2C2C2C"></div>
+            <div class="color-dot" style="background:#C4774C"></div>
+        </div>
+    </div>
+
+    <!-- CO-ORD SETS -->
+    <div class="product-card" data-cat="coords" data-price="3299">
+        <div class="product-img">
+            <span class="product-badge">Bestseller</span>
+            <img src="https://images.unsplash.com/photo-1764605514472-7d6cdfeae847?w=400&q=80&fit=crop&crop=center" alt="Terra Palazzo Set">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Co-ord Set · Cotton</div>
+        <h4>Terra Palazzo Set</h4>
+        <p class="price">₹3,299</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#C4774C"></div>
+            <div class="color-dot" style="background:#8B9E7E"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="coords" data-price="3699">
+        <div class="product-img">
+            <img src="https://plus.unsplash.com/premium_photo-1718570265593-8e46d7ef65ae?w=400&q=80&fit=crop&crop=center" alt="Jaipur Block Print Set">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Co-ord Set · Block Print</div>
+        <h4>Jaipur Block Print Set</h4>
+        <p class="price">₹3,699</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#4A6741"></div>
+            <div class="color-dot" style="background:#8B4513"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="coords" data-price="4999">
+        <div class="product-img">
+            <span class="product-badge sage">Premium</span>
+            <img src="https://images.unsplash.com/photo-1769063382663-ec2414702d3a?w=400&q=80&fit=crop&crop=center" alt="Chanderi Silk Set">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Co-ord Set · Chanderi Silk</div>
+        <h4>Chanderi Celebration Set</h4>
+        <p class="price">₹4,999</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#B8955A"></div>
+            <div class="color-dot" style="background:#C4774C"></div>
+        </div>
+    </div>
+
+    <!-- NURSING WEAR -->
+    <div class="product-card" data-cat="nursing" data-price="2199">
+        <div class="product-img">
+            <span class="product-badge">Nursing</span>
+            <img src="https://plus.unsplash.com/premium_photo-1673367754358-b1824964f031?w=400&q=80&fit=crop&crop=center" alt="Bloom Kaftan">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Nursing · Cotton</div>
+        <h4>Bloom Nursing Kaftan</h4>
+        <p class="price">₹2,199</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#D4C4B0"></div>
+            <div class="color-dot" style="background:#8B9E7E"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="nursing" data-price="1799">
+        <div class="product-img">
+            <span class="product-badge">Nursing</span>
+            <img src="https://plus.unsplash.com/premium_photo-1661683519100-88207fe690a1?w=400&q=80&fit=crop&crop=center" alt="Nursing Wrap Top">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Nursing · Bamboo Cotton</div>
+        <h4>Easy-Access Wrap Top</h4>
+        <p class="price">₹1,799</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#FAF6F1"></div>
+            <div class="color-dot" style="background:#C4774C"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="nursing" data-price="2899">
+        <div class="product-img">
+            <span class="product-badge">Nursing</span>
+            <img src="https://plus.unsplash.com/premium_photo-1677355759322-b99fb5a4e4cb?w=400&q=80&fit=crop&crop=center" alt="Nursing Midi Dress">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Nursing · Linen Blend</div>
+        <h4>Nourish Midi Dress</h4>
+        <p class="price">₹2,899</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#8B9E7E"></div>
+            <div class="color-dot" style="background:#D4A574"></div>
+        </div>
+    </div>
+
+    <div class="product-card" data-cat="nursing" data-price="2499">
+        <div class="product-img">
+            <img src="https://plus.unsplash.com/premium_photo-1661683919863-070f582a8b08?w=400&q=80&fit=crop&crop=center" alt="Nursing Button Tunic">
+            <div class="quick-add">Quick Add →</div>
+        </div>
+        <div class="product-meta">Nursing · Organic Cotton</div>
+        <h4>Garden Button Tunic</h4>
+        <p class="price">₹2,499</p>
+        <div class="product-colors">
+            <div class="color-dot" style="background:#4A6741"></div>
+            <div class="color-dot" style="background:#FAF6F1"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="footer-brand">ma<span>ya</span></div>
+            <p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p>
+        </div>
+        <div>
+            <h4>Shop</h4>
+            <ul>
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="shop.html#dresses">Dresses</a></li>
+                <li><a href="shop.html#tops">Tops & Kurtis</a></li>
+                <li><a href="shop.html#coords">Co-ord Sets</a></li>
+                <li><a href="shop.html#nursing">Nursing Wear</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="sustainability.html">Sustainability</a></li>
+                <li><a href="size-guide.html">Size Guide</a></li>
+                <li><a href="care-guide.html">Care Guide</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Help</h4>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.html#shipping">Shipping & Returns</a></li>
+                <li><a href="faq.html#sizing">Sizing Help</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Maya. All rights reserved.</span>
+        <span>Made with 🌿 in India</span>
+    </div>
+</footer>
+
+<script>
+    // Category filtering
+    const tabs = document.querySelectorAll('.cat-tab');
+    const cards = document.querySelectorAll('.product-card');
+    const countEl = document.getElementById('product-count');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const cat = tab.dataset.cat;
+            let visible = 0;
+            cards.forEach(card => {
+                if (cat === 'all' || card.dataset.cat === cat) {
+                    card.style.display = '';
+                    visible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            countEl.textContent = visible + ' product' + (visible !== 1 ? 's' : '');
+        });
+    });
+
+    // Sorting
+    document.getElementById('sort-select').addEventListener('change', function() {
+        const grid = document.getElementById('products-grid');
+        const arr = Array.from(cards);
+        if (this.selectedIndex === 1) arr.sort((a,b) => a.dataset.price - b.dataset.price);
+        if (this.selectedIndex === 2) arr.sort((a,b) => b.dataset.price - a.dataset.price);
+        arr.forEach(c => grid.appendChild(c));
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Guide — Maya</title>
+    <meta name="description" content="How to care for your Maya pieces — fabric care for cotton, linen, and silk.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --cream:#FAF6F1;--warm-white:#FFF9F2;--sand:#E8DDD3;--terracotta:#C4774C;--terracotta-light:rgba(196,119,76,0.1);--sage:#8B9E7E;--sage-light:rgba(139,158,126,0.1);--charcoal:#2C2C2C;--text:#3D3530;--text-muted:#8B7E74;--gold:#B8955A; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        .page-header { text-align: center; padding: 4rem 2rem 2rem; }
+        .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; }
+        .page-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        .care-content { max-width: 800px; margin: 0 auto; padding: 2rem; }
+
+        .fabric-card { border: 1px solid var(--sand); border-radius: 12px; padding: 2.5rem; margin-bottom: 2rem; transition: border-color 0.3s; }
+        .fabric-card:hover { border-color: var(--terracotta); }
+        .fabric-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .fabric-icon { font-size: 2rem; }
+        .fabric-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; }
+        .fabric-header .tag { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sage); background: var(--sage-light); padding: 0.2rem 0.6rem; border-radius: 100px; }
+
+        .care-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .care-item h4 { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.3rem; }
+        .care-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+        .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        .do-list, .dont-list { padding: 1.5rem; border-radius: 8px; }
+        .do-list { background: var(--sage-light); }
+        .dont-list { background: var(--terracotta-light); }
+        .do-list h4 { color: var(--sage); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.8rem; }
+        .dont-list h4 { color: var(--terracotta); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.8rem; }
+        .do-list li, .dont-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem; list-style: none; }
+        .do-list li::before { content: '✓ '; color: var(--sage); font-weight: 500; }
+        .dont-list li::before { content: '✗ '; color: var(--terracotta); font-weight: 500; }
+
+        /* General tips */
+        .general-tips { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem; margin-top: 2rem; }
+        .general-tips-inner { max-width: 800px; margin: 0 auto; }
+        .general-tips h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; text-align: center; }
+        .tip-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .tip { text-align: center; }
+        .tip .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+        .tip h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .tip p { font-size: 0.8rem; color: rgba(232,221,211,0.6); line-height: 1.6; }
+
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; } footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232,221,211,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232,221,211,0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232,221,211,0.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+            .care-grid, .do-dont { grid-template-columns: 1fr; }
+            .tip-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="announcement">Free shipping on orders above ₹1,999 · Handcrafted with love 🌿</div>
+<nav>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="sustainability.html">Values</a></li>
+        <li><a href="faq.html">Help</a></li>
+    </ul>
+    <a href="index.html" class="brand">ma<span>ya</span></a>
+    <div class="nav-icons">
+        <a href="#" title="Search">🔍</a>
+        <a href="#" title="Account">👤</a>
+        <a href="#" title="Cart">🛒</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Care Guide</h1>
+    <p>Your Maya pieces are made from natural fibers that get softer and more beautiful with each wash — if you treat them right.</p>
+</div>
+
+<div class="care-content">
+
+    <!-- Cotton -->
+    <div class="fabric-card">
+        <div class="fabric-header">
+            <div class="fabric-icon">🌿</div>
+            <h2>Organic Cotton</h2>
+            <span class="tag">Most pieces</span>
+        </div>
+        <div class="care-grid">
+            <div class="care-item">
+                <h4>Washing</h4>
+                <p>Machine wash cold (30°C) on a gentle cycle, or hand wash. Use a mild, plant-based detergent. Turn inside out before washing.</p>
+            </div>
+            <div class="care-item">
+                <h4>Drying</h4>
+                <p>Line dry in shade. Avoid direct sunlight to preserve colours — especially block-printed pieces. Never tumble dry.</p>
+            </div>
+            <div class="care-item">
+                <h4>Ironing</h4>
+                <p>Medium heat iron while slightly damp for best results. Iron on the reverse side for printed fabrics.</p>
+            </div>
+            <div class="care-item">
+                <h4>Storage</h4>
+                <p>Fold and store in a cool, dry place. For block prints, separate with muslin cloth to prevent colour transfer.</p>
+            </div>
+        </div>
+        <div class="do-dont">
+            <div class="do-list">
+                <h4>Do</h4>
+                <ul>
+                    <li>First wash separately — slight colour bleeding is natural</li>
+                    <li>Use cold water to preserve natural dyes</li>
+                    <li>Expect slight shrinkage (1–2%) — we pre-wash our fabrics</li>
+                </ul>
+            </div>
+            <div class="dont-list">
+                <h4>Don't</h4>
+                <ul>
+                    <li>Use bleach or harsh chemicals</li>
+                    <li>Wring aggressively — gently squeeze out water</li>
+                    <li>Dry in direct sunlight</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Linen -->
+    <div class="fabric-card">
+        <div class="fabric-header">
+            <div class="fabric-icon">🌾</div>
+            <h2>Linen</h2>
+            <span class="tag">Sahara collection</span>
+        </div>
+        <div class="care-grid">
+            <div class="care-item">
+                <h4>Washing</h4>
+                <p>Hand wash in lukewarm water or machine wash on delicate with a mesh laundry bag. Use gentle, pH-neutral detergent.</p>
+            </div>
+            <div class="care-item">
+                <h4>Drying</h4>
+                <p>Lay flat on a towel to dry, or hang on a padded hanger. Linen dries quickly — remove promptly to avoid creasing.</p>
+            </div>
+            <div class="care-item">
+                <h4>Ironing</h4>
+                <p>Iron while slightly damp on medium-high heat. Or simply embrace the natural crinkle — linen is meant to look lived-in and lovely.</p>
+            </div>
+            <div class="care-item">
+                <h4>Storage</h4>
+                <p>Hang or fold loosely. Avoid compressed storage. Linen needs to breathe.</p>
+            </div>
+        </div>
+        <div class="do-dont">
+            <div class="do-list">
+                <h4>Do</h4>
+                <ul>
+                    <li>Embrace the natural texture and creases</li>
+                    <li>Steam for a quick refresh between washes</li>
+                    <li>Wear it — linen gets softer with every wash</li>
+                </ul>
+            </div>
+            <div class="dont-list">
+                <h4>Don't</h4>
+                <ul>
+                    <li>Tumble dry — it causes excessive shrinkage</li>
+                    <li>Use fabric softener — it coats the fibers</li>
+                    <li>Store in plastic bags</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chanderi Silk -->
+    <div class="fabric-card">
+        <div class="fabric-header">
+            <div class="fabric-icon">✨</div>
+            <h2>Chanderi Silk</h2>
+            <span class="tag">Premium pieces</span>
+        </div>
+        <div class="care-grid">
+            <div class="care-item">
+                <h4>Washing</h4>
+                <p>Dry clean recommended for best results. If hand washing, use very cold water with a silk-specific detergent. Wash quickly and gently — do not soak.</p>
+            </div>
+            <div class="care-item">
+                <h4>Drying</h4>
+                <p>Roll in a clean towel to absorb excess water. Lay flat to dry away from heat and direct light. Never wring.</p>
+            </div>
+            <div class="care-item">
+                <h4>Ironing</h4>
+                <p>Low heat only, on the reverse side. Place a pressing cloth between the iron and fabric. Or use a steamer held at a distance.</p>
+            </div>
+            <div class="care-item">
+                <h4>Storage</h4>
+                <p>Wrap in muslin or acid-free tissue paper. Store flat. Keep away from direct light to preserve the shimmer and colour.</p>
+            </div>
+        </div>
+        <div class="do-dont">
+            <div class="do-list">
+                <h4>Do</h4>
+                <ul>
+                    <li>Handle with clean, dry hands</li>
+                    <li>Air out after wearing</li>
+                    <li>Treat stains immediately with cold water</li>
+                </ul>
+            </div>
+            <div class="dont-list">
+                <h4>Don't</h4>
+                <ul>
+                    <li>Spray perfume directly on the fabric</li>
+                    <li>Use hot water — ever</li>
+                    <li>Hang on wire hangers (causes stretching)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="general-tips">
+    <div class="general-tips-inner">
+        <h2>General Love Notes</h2>
+        <div class="tip-row">
+            <div class="tip">
+                <div class="icon">🧴</div>
+                <h4>Natural Dyes</h4>
+                <p>Our natural dyes may fade slightly over time — this is part of their beauty. Each wash creates a unique patina that's entirely yours.</p>
+            </div>
+            <div class="tip">
+                <div class="icon">🌸</div>
+                <h4>Stain Removal</h4>
+                <p>For most stains, cold water + a drop of mild soap works wonders. Dab gently — never rub. For stubborn stains, a paste of baking soda works magic.</p>
+            </div>
+            <div class="tip">
+                <div class="icon">♻️</div>
+                <h4>When It's Time</h4>
+                <p>When your Maya piece has lived its life, send it back to us! We'll upcycle or compost it — and give you 15% off your next order.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div><div class="footer-brand">ma<span>ya</span></div><p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p></div>
+        <div><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html#dresses">Dresses</a></li><li><a href="shop.html#tops">Tops & Kurtis</a></li><li><a href="shop.html#coords">Co-ord Sets</a></li><li><a href="shop.html#nursing">Nursing Wear</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="size-guide.html">Size Guide</a></li><li><a href="care-guide.html">Care Guide</a></li></ul></div>
+        <div><h4>Help</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="faq.html#shipping">Shipping & Returns</a></li><li><a href="faq.html#sizing">Sizing Help</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Maya. All rights reserved.</span><span>Made with 🌿 in India</span></div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability — Maya</title>
+    <meta name="description" content="Maya's commitment to sustainable fashion — natural fabrics, artisan partnerships, and earth-friendly packaging.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --cream:#FAF6F1;--warm-white:#FFF9F2;--sand:#E8DDD3;--terracotta:#C4774C;--terracotta-light:rgba(196,119,76,0.1);--sage:#8B9E7E;--sage-light:rgba(139,158,126,0.1);--charcoal:#2C2C2C;--text:#3D3530;--text-muted:#8B7E74;--gold:#B8955A; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        /* Hero */
+        .page-hero { position: relative; height: 50vh; overflow: hidden; }
+        .page-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .page-hero-overlay { position: absolute; inset: 0; background: rgba(44,44,44,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; color: white; }
+        .page-hero .subtitle { color: rgba(255,255,255,0.7); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 0.5rem; }
+
+        .section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .section.visible { opacity: 1; transform: none; }
+        .section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1rem; }
+        .section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .section p { color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.8; }
+
+        /* Pillars */
+        .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin: 3rem 0; }
+        .pillar { padding: 2.5rem; border: 1px solid var(--sand); border-radius: 12px; transition: border-color 0.3s, transform 0.3s; }
+        .pillar:hover { border-color: var(--terracotta); transform: translateY(-3px); }
+        .pillar .icon { font-size: 2rem; margin-bottom: 1rem; }
+        .pillar h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.8rem; }
+        .pillar p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* Stats */
+        .stats-strip { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem; }
+        .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+        .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--terracotta); font-weight: 400; }
+        .stat-label { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(232,221,211,0.6); margin-top: 0.3rem; }
+
+        /* Image break */
+        .img-break { height: 40vh; overflow: hidden; }
+
+        /* Impact list */
+        .impact-list { list-style: none; margin: 2rem 0; }
+        .impact-list li { padding: 1rem 0; border-bottom: 1px solid var(--sand); font-size: 0.95rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: flex-start; }
+        .impact-list li::before { content: '🌿'; flex-shrink: 0; }
+
+        /* Quote */
+        .big-quote { background: linear-gradient(135deg, var(--sage-light), var(--terracotta-light)); padding: 5rem 2rem; text-align: center; }
+        .big-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; font-weight: 300; line-height: 1.6; max-width: 700px; margin: 0 auto 1rem; }
+        .big-quote .attr { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--terracotta); }
+
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; } footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232,221,211,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232,221,211,0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232,221,211,0.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+            .pillars { grid-template-columns: 1fr; }
+            .stats-inner { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) { .stats-inner { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="announcement">Free shipping on orders above ₹1,999 · Handcrafted with love 🌿</div>
+<nav>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="sustainability.html" class="active">Values</a></li>
+        <li><a href="faq.html">Help</a></li>
+    </ul>
+    <a href="index.html" class="brand">ma<span>ya</span></a>
+    <div class="nav-icons">
+        <a href="#" title="Search">🔍</a>
+        <a href="#" title="Account">👤</a>
+        <a href="#" title="Cart">🛒</a>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <img src="https://images.unsplash.com/photo-1635790073975-ac99496914e3?w=1400&q=80&fit=crop&crop=center" alt="Sustainable fabrics and artisan craft">
+    <div class="page-hero-overlay">
+        <p class="subtitle">Our Values</p>
+        <h1>Fashion That Respects the Earth</h1>
+    </div>
+</section>
+
+<div class="section">
+    <div class="section-label">Our Promise</div>
+    <h2>Sustainability Isn't a Trend — It's Who We Are</h2>
+    <p>At Maya, sustainability isn't a marketing checkbox. It's woven into every decision we make — from the fibers we choose to the artisans we partner with, from the dyes that colour our fabrics to the packaging that arrives at your door.</p>
+    <p>We believe that bringing new life into the world shouldn't come at the cost of the planet that life will inherit. Every Maya piece is our small promise to the future.</p>
+</div>
+
+<div class="stats-strip">
+    <div class="stats-inner">
+        <div><div class="stat-num">100%</div><div class="stat-label">Natural Fibers</div></div>
+        <div><div class="stat-num">45+</div><div class="stat-label">Women Artisans</div></div>
+        <div><div class="stat-num">Zero</div><div class="stat-label">Plastic Packaging</div></div>
+        <div><div class="stat-num">80%</div><div class="stat-label">Lower Carbon vs Fast Fashion</div></div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>Our Four Pillars</h2>
+    <div class="pillars">
+        <div class="pillar">
+            <div class="icon">🌾</div>
+            <h3>Natural Fabrics Only</h3>
+            <p>We use exclusively natural fibers — GOTS-certified organic cotton, handwoven linen from Gujarat, and Chanderi silk from Madhya Pradesh. No polyester, no synthetic blends, no microplastic shedding. Just fabrics that breathe with you and return to the earth.</p>
+        </div>
+        <div class="pillar">
+            <div class="icon">🤲</div>
+            <h3>Artisan Partnerships</h3>
+            <p>We work directly with women-led artisan cooperatives in Rajasthan, Madhya Pradesh, and West Bengal. Block printing, hand embroidery, natural dyeing — traditional techniques passed down through generations, now sustaining livelihoods and keeping heritage alive.</p>
+        </div>
+        <div class="pillar">
+            <div class="icon">📦</div>
+            <h3>Conscious Packaging</h3>
+            <p>Your Maya order arrives in a recycled kraft box, wrapped in muslin cloth (reusable as a baby burp cloth!). Seed paper tags you can plant. Soy-based inks. Zero plastic, zero waste, zero guilt.</p>
+        </div>
+        <div class="pillar">
+            <div class="icon">🌍</div>
+            <h3>Small Batches, Less Waste</h3>
+            <p>We produce in small batches of 50–100 pieces per design. This means less overproduction, less waste, and more care in every stitch. Our zero-waste cutting patterns ensure fabric scraps become accessories or stuffing for baby toys.</p>
+        </div>
+    </div>
+</div>
+
+<div class="img-break">
+    <img src="https://images.unsplash.com/photo-1684259499086-93cb3e555803?w=1400&q=80&fit=crop&crop=center" alt="Artisan hand-block printing">
+</div>
+
+<div class="section">
+    <div class="section-label">Impact</div>
+    <h2>What We're Working Towards</h2>
+    <ul class="impact-list">
+        <li>Carbon-neutral shipping by 2027 through partnerships with local courier services and carbon offset programs</li>
+        <li>100% solar-powered production facility — currently at 60%, with full transition planned by late 2026</li>
+        <li>Water recycling at our dyeing units — saving approximately 10,000 litres per month</li>
+        <li>Living wage guarantee for all artisan partners, with annual reviews and profit-sharing</li>
+        <li>Take-back program launching Q3 2026 — send us your worn Maya pieces and we'll upcycle or compost them</li>
+        <li>Community education fund — 2% of every sale supports women's education in artisan communities</li>
+    </ul>
+</div>
+
+<div class="big-quote">
+    <blockquote>"We don't want to be the biggest maternity brand. We want to be the most thoughtful one."</blockquote>
+    <div class="attr">— Founder, Maya</div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div><div class="footer-brand">ma<span>ya</span></div><p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p></div>
+        <div><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html#dresses">Dresses</a></li><li><a href="shop.html#tops">Tops & Kurtis</a></li><li><a href="shop.html#coords">Co-ord Sets</a></li><li><a href="shop.html#nursing">Nursing Wear</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="size-guide.html">Size Guide</a></li><li><a href="care-guide.html">Care Guide</a></li></ul></div>
+        <div><h4>Help</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="faq.html#shipping">Shipping & Returns</a></li><li><a href="faq.html#sizing">Sizing Help</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Maya. All rights reserved.</span><span>Made with 🌿 in India</span></div>
+</footer>
+
+<script>
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

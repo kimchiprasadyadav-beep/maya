@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story — Maya</title>
+    <meta name="description" content="The story behind Maya — born from a bump, a dream, and a love for Indian craft.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FAF6F1; --warm-white: #FFF9F2; --sand: #E8DDD3;
+            --terracotta: #C4774C; --terracotta-light: rgba(196,119,76,0.1);
+            --sage: #8B9E7E; --sage-light: rgba(139,158,126,0.1);
+            --charcoal: #2C2C2C; --text: #3D3530; --text-muted: #8B7E74; --gold: #B8955A;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        /* Page Hero */
+        .page-hero { position: relative; height: 50vh; overflow: hidden; }
+        .page-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .page-hero-overlay { position: absolute; inset: 0; background: rgba(44,44,44,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; color: white; }
+        .page-hero .subtitle { color: rgba(255,255,255,0.7); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 0.5rem; }
+
+        /* Content sections */
+        .content-section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .content-section.visible { opacity: 1; transform: none; }
+        .section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1rem; }
+        .content-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .content-section p { color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.8; }
+        .content-section p em { color: var(--terracotta); font-style: italic; }
+
+        /* Story grid */
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+        .story-grid.reverse { direction: rtl; }
+        .story-grid.reverse > * { direction: ltr; }
+        .story-image { aspect-ratio: 4/5; border-radius: 8px; overflow: hidden; }
+
+        /* Values strip */
+        .values-strip { background: var(--charcoal); color: var(--sand); padding: 5rem 2rem; }
+        .values-strip-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+        .values-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; margin-bottom: 3rem; }
+        .values-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .value-box { padding: 2rem 1rem; }
+        .value-box .icon { font-size: 2rem; margin-bottom: 1rem; }
+        .value-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .value-box p { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+
+        /* Team */
+        .team-section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; text-align: center; }
+        .team-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; margin-bottom: 1rem; }
+        .team-section .intro { color: var(--text-muted); max-width: 500px; margin: 0 auto 3rem; font-size: 0.95rem; }
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .team-card img { aspect-ratio: 1; border-radius: 50%; width: 140px; height: 140px; margin: 0 auto 1rem; }
+        .team-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; }
+        .team-card .role { font-size: 0.8rem; color: var(--terracotta); letter-spacing: 1px; text-transform: uppercase; }
+
+        /* Quote */
+        .big-quote { background: linear-gradient(135deg, var(--terracotta-light), var(--sage-light)); padding: 5rem 2rem; text-align: center; }
+        .big-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; font-weight: 300; line-height: 1.6; max-width: 700px; margin: 0 auto 1rem; }
+        .big-quote .attr { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--terracotta); }
+
+        /* Footer */
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; }
+        footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232,221,211,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232,221,211,0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232,221,211,0.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .story-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .story-grid.reverse { direction: ltr; }
+            .values-row { grid-template-columns: 1fr 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .values-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="announcement">Free shipping on orders above ₹1,999 · Handcrafted with love 🌿</div>
+
+<nav>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html" class="active">Our Story</a></li>
+        <li><a href="sustainability.html">Values</a></li>
+        <li><a href="faq.html">Help</a></li>
+    </ul>
+    <a href="index.html" class="brand">ma<span>ya</span></a>
+    <div class="nav-icons">
+        <a href="#" title="Search">🔍</a>
+        <a href="#" title="Account">👤</a>
+        <a href="#" title="Cart">🛒</a>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <img src="https://images.unsplash.com/photo-1601468916450-f18d68082d7a?w=1400&q=80&fit=crop&crop=center" alt="Our Story — Maya">
+    <div class="page-hero-overlay">
+        <p class="subtitle">Our Story</p>
+        <h1>Born from a Bump & a Dream</h1>
+    </div>
+</section>
+
+<!-- Origin story -->
+<div class="story-grid content-section">
+    <div class="story-image">
+        <img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=600&q=80&fit=crop&crop=center" alt="Founder of Maya">
+    </div>
+    <div>
+        <div class="section-label">The Beginning</div>
+        <h2>Where It All Started</h2>
+        <p>When I found out I was expecting, I was over the moon. But when I started shopping for maternity clothes, my heart sank. Everything was either clinical white, shapeless black, or covered in cutesy prints I'd never wear.</p>
+        <p>I'm a woman who loves <em>colour</em>, loves <em>craft</em>, loves the feel of handloom cotton against my skin. I wanted to celebrate my body — not hide it in a tent. Where was the bohemian, the earthy, the soulful?</p>
+        <p>So I did what any slightly hormonal, deeply passionate woman would do — I started sketching designs on the back of my pregnancy journal. And Maya was born — just a few months before my daughter was.</p>
+    </div>
+</div>
+
+<div class="story-grid reverse content-section">
+    <div>
+        <div class="section-label">The Mission</div>
+        <h2>Maternity Wear with Soul</h2>
+        <p>Maya exists because we believe pregnancy is not a condition — it's a <em>celebration</em>. You shouldn't have to choose between comfort and style, or between sustainability and affordability.</p>
+        <p>Every piece we create is designed to grow with you — through your first trimester, your baby shower, your nursing days, and beyond. We work with natural fabrics, traditional artisans, and age-old techniques to bring you clothing that feels as good as it looks.</p>
+        <p>We're not just a maternity brand. We're a love letter to the free-spirited mama who refuses to blend in.</p>
+    </div>
+    <div class="story-image">
+        <img src="https://plus.unsplash.com/premium_photo-1664053011441-e61b42285903?w=600&q=80&fit=crop&crop=center" alt="Expecting mother in bohemian wear">
+    </div>
+</div>
+
+<!-- Big Quote -->
+<div class="big-quote">
+    <blockquote>"I didn't want to just dress the bump. I wanted to dress the woman — her spirit, her fire, her wild, beautiful self."</blockquote>
+    <div class="attr">— Founder, Maya</div>
+</div>
+
+<!-- Values strip -->
+<div class="values-strip">
+    <div class="values-strip-inner">
+        <h2>What Guides Us</h2>
+        <div class="values-row">
+            <div class="value-box">
+                <div class="icon">🌾</div>
+                <h3>Natural Fabrics</h3>
+                <p>Only organic cotton, linen, and Chanderi silk. Never polyester, never compromise.</p>
+            </div>
+            <div class="value-box">
+                <div class="icon">🤲</div>
+                <h3>Artisan Craft</h3>
+                <p>Block printing, hand embroidery, natural dyes — keeping traditions alive.</p>
+            </div>
+            <div class="value-box">
+                <div class="icon">♻️</div>
+                <h3>Slow Fashion</h3>
+                <p>Small batches, zero waste patterns, recyclable packaging. Fashion that respects the earth.</p>
+            </div>
+            <div class="value-box">
+                <div class="icon">💛</div>
+                <h3>Fair Wages</h3>
+                <p>Every artisan earns above living wage. No exceptions, no shortcuts.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Team -->
+<div class="team-section content-section">
+    <div class="section-label">The Tribe</div>
+    <h2>The Women Behind Maya</h2>
+    <p class="intro">A small, passionate team of designers, artisans, and dreamers who believe in the power of beautiful, conscious clothing.</p>
+    <div class="team-grid">
+        <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80&fit=crop&crop=face" alt="Founder">
+            <h4>The Founder</h4>
+            <p class="role">Design & Vision</p>
+        </div>
+        <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=300&q=80&fit=crop&crop=face" alt="Head of Design">
+            <h4>Kavya</h4>
+            <p class="role">Head of Design</p>
+        </div>
+        <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80&fit=crop&crop=face" alt="Artisan Lead">
+            <h4>Lakshmi</h4>
+            <p class="role">Artisan Relations</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="footer-brand">ma<span>ya</span></div>
+            <p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p>
+        </div>
+        <div>
+            <h4>Shop</h4>
+            <ul>
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="shop.html#dresses">Dresses</a></li>
+                <li><a href="shop.html#tops">Tops & Kurtis</a></li>
+                <li><a href="shop.html#coords">Co-ord Sets</a></li>
+                <li><a href="shop.html#nursing">Nursing Wear</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="sustainability.html">Sustainability</a></li>
+                <li><a href="size-guide.html">Size Guide</a></li>
+                <li><a href="care-guide.html">Care Guide</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Help</h4>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.html#shipping">Shipping & Returns</a></li>
+                <li><a href="faq.html#sizing">Sizing Help</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Maya. All rights reserved.</span>
+        <span>Made with 🌿 in India</span>
+    </div>
+</footer>
+
+<script>
+    const sections = document.querySelectorAll('.content-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

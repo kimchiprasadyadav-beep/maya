@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Size Guide — Maya</title>
+    <meta name="description" content="Maya size guide — find your perfect fit across all trimesters.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --cream:#FAF6F1;--warm-white:#FFF9F2;--sand:#E8DDD3;--terracotta:#C4774C;--terracotta-light:rgba(196,119,76,0.1);--sage:#8B9E7E;--sage-light:rgba(139,158,126,0.1);--charcoal:#2C2C2C;--text:#3D3530;--text-muted:#8B7E74;--gold:#B8955A; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        .page-header { text-align: center; padding: 4rem 2rem 2rem; }
+        .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; }
+        .page-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        .guide-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        /* How to measure */
+        .measure-section { margin-bottom: 4rem; }
+        .measure-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; text-align: center; }
+        .measure-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem; }
+        .measure-item { text-align: center; padding: 2rem 1rem; border: 1px solid var(--sand); border-radius: 12px; }
+        .measure-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .measure-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .measure-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* Size table */
+        .size-table-wrap { overflow-x: auto; margin-bottom: 3rem; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        thead { background: var(--charcoal); color: var(--sand); }
+        th { padding: 1rem 1.2rem; font-weight: 500; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; text-align: left; }
+        td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--sand); }
+        tbody tr:hover { background: var(--terracotta-light); }
+        .size-note { font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 1rem; font-style: italic; }
+
+        /* Trimester guide */
+        .trimester-section { margin-bottom: 4rem; }
+        .trimester-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; text-align: center; }
+        .trimester-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .trimester-card { padding: 2rem; border: 1px solid var(--sand); border-radius: 12px; transition: border-color 0.3s, transform 0.3s; }
+        .trimester-card:hover { border-color: var(--terracotta); transform: translateY(-3px); }
+        .trimester-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--terracotta); }
+        .trimester-card .weeks { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+        .trimester-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+        .trimester-card ul { list-style: none; margin-top: 0.8rem; }
+        .trimester-card li { font-size: 0.85rem; color: var(--text-muted); padding: 0.2rem 0; }
+        .trimester-card li::before { content: '✦ '; color: var(--terracotta); }
+
+        /* Tip box */
+        .tip-box { background: var(--sage-light); border-left: 3px solid var(--sage); padding: 1.5rem 2rem; border-radius: 0 8px 8px 0; margin: 2rem 0; }
+        .tip-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--sage); }
+        .tip-box p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* CTA */
+        .cta-strip { background: var(--charcoal); color: var(--sand); padding: 3rem 2rem; text-align: center; }
+        .cta-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .cta-strip p { font-size: 0.85rem; color: rgba(232,221,211,0.6); margin-bottom: 1.5rem; }
+        .cta-strip a { display: inline-block; padding: 0.8rem 2rem; border: 1.5px solid var(--sand); color: var(--sand); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; }
+        .cta-strip a:hover { background: var(--sand); color: var(--charcoal); }
+
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; } footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232,221,211,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232,221,211,0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232,221,211,0.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+            .measure-grid, .trimester-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="announcement">Free shipping on orders above ₹1,999 · Handcrafted with love 🌿</div>
+<nav>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="sustainability.html">Values</a></li>
+        <li><a href="faq.html">Help</a></li>
+    </ul>
+    <a href="index.html" class="brand">ma<span>ya</span></a>
+    <div class="nav-icons">
+        <a href="#" title="Search">🔍</a>
+        <a href="#" title="Account">👤</a>
+        <a href="#" title="Cart">🛒</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Size Guide</h1>
+    <p>Our pieces are designed with generous, forgiving silhouettes. When in doubt, go with your pre-pregnancy size — our fabrics stretch and flow with you.</p>
+</div>
+
+<div class="guide-content">
+
+    <div class="measure-section">
+        <h2>How to Measure</h2>
+        <div class="measure-grid">
+            <div class="measure-item">
+                <div class="measure-icon">📐</div>
+                <h3>Bust</h3>
+                <p>Measure around the fullest part of your bust, keeping the tape level across your back.</p>
+            </div>
+            <div class="measure-item">
+                <div class="measure-icon">🌀</div>
+                <h3>Belly</h3>
+                <p>Wrap the tape around the widest part of your bump. Don't pull tight — let it rest naturally.</p>
+            </div>
+            <div class="measure-item">
+                <div class="measure-icon">📏</div>
+                <h3>Hips</h3>
+                <p>Measure around the fullest part of your hips, about 20cm below your waist.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="measure-section">
+        <h2>Size Chart</h2>
+        <p class="size-note">All measurements in inches. Our garments have 2–4 inches of ease built in.</p>
+        <div class="size-table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>UK</th>
+                        <th>Bust</th>
+                        <th>Belly (up to)</th>
+                        <th>Hips</th>
+                        <th>Pre-pregnancy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>XS</strong></td><td>6–8</td><td>32–34</td><td>36</td><td>34–36</td><td>XS / S</td></tr>
+                    <tr><td><strong>S</strong></td><td>8–10</td><td>34–36</td><td>40</td><td>36–38</td><td>S</td></tr>
+                    <tr><td><strong>M</strong></td><td>10–12</td><td>36–38</td><td>44</td><td>38–40</td><td>M</td></tr>
+                    <tr><td><strong>L</strong></td><td>12–14</td><td>38–40</td><td>48</td><td>40–42</td><td>L</td></tr>
+                    <tr><td><strong>XL</strong></td><td>14–16</td><td>40–42</td><td>52</td><td>42–44</td><td>XL</td></tr>
+                    <tr><td><strong>XXL</strong></td><td>16–18</td><td>42–44</td><td>56</td><td>44–46</td><td>XXL</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <h4>🌿 Maya Tip</h4>
+            <p>Most of our pieces feature adjustable ties, elastic panels, and wrap silhouettes — so they flex with you from bump to postpartum. If you're between sizes, we recommend going with the smaller size for a more fitted look, or the larger for a flowy bohemian drape.</p>
+        </div>
+    </div>
+
+    <div class="trimester-section">
+        <h2>Fit Guide by Trimester</h2>
+        <div class="trimester-grid">
+            <div class="trimester-card">
+                <h3>First Trimester</h3>
+                <div class="weeks">Weeks 1–12</div>
+                <p>Your body is just beginning to change. Most mamas can wear their pre-pregnancy size comfortably.</p>
+                <ul>
+                    <li>Order your usual pre-pregnancy size</li>
+                    <li>Wrap tops & dresses work beautifully</li>
+                    <li>Kaftans for all-day comfort</li>
+                </ul>
+            </div>
+            <div class="trimester-card">
+                <h3>Second Trimester</h3>
+                <div class="weeks">Weeks 13–26</div>
+                <p>The bump is showing! Our stretchy fabrics and adjustable ties will accommodate your growing belly.</p>
+                <ul>
+                    <li>Stick with pre-pregnancy size</li>
+                    <li>Palazzo sets give room to grow</li>
+                    <li>Empire waist dresses are your friend</li>
+                </ul>
+            </div>
+            <div class="trimester-card">
+                <h3>Third Trimester</h3>
+                <div class="weeks">Weeks 27–40</div>
+                <p>Full bloom! If you've gained significantly, consider sizing up. Our maxi dresses and kaftans are especially forgiving.</p>
+                <ul>
+                    <li>Size up if bust has grown 2+ cup sizes</li>
+                    <li>Kaftans & maxis for maximum comfort</li>
+                    <li>Nursing wear for postpartum transition</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <h4>💬 Still Unsure?</h4>
+        <p>DM us on Instagram <a href="https://instagram.com/wearemaya" style="color:var(--terracotta)">@wearemaya</a> or WhatsApp us at +91 98765 43210 with your measurements and trimester — we'll personally help you find the perfect size!</p>
+    </div>
+
+</div>
+
+<div class="cta-strip">
+    <h2>Ready to Find Your Fit?</h2>
+    <p>Every piece is designed to make you feel beautiful, comfortable, and free.</p>
+    <a href="shop.html">Shop Now</a>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div><div class="footer-brand">ma<span>ya</span></div><p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p></div>
+        <div><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html#dresses">Dresses</a></li><li><a href="shop.html#tops">Tops & Kurtis</a></li><li><a href="shop.html#coords">Co-ord Sets</a></li><li><a href="shop.html#nursing">Nursing Wear</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="size-guide.html">Size Guide</a></li><li><a href="care-guide.html">Care Guide</a></li></ul></div>
+        <div><h4>Help</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="faq.html#shipping">Shipping & Returns</a></li><li><a href="faq.html#sizing">Sizing Help</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Maya. All rights reserved.</span><span>Made with 🌿 in India</span></div>
+</footer>
+
+</body>
+</html>

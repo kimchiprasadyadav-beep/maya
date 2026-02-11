@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Maya</title>
+    <meta name="description" content="Frequently asked questions about Maya — shipping, returns, sizing, nursing access, and fabric care.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --cream:#FAF6F1;--warm-white:#FFF9F2;--sand:#E8DDD3;--terracotta:#C4774C;--terracotta-light:rgba(196,119,76,0.1);--sage:#8B9E7E;--sage-light:rgba(139,158,126,0.1);--charcoal:#2C2C2C;--text:#3D3530;--text-muted:#8B7E74;--gold:#B8955A; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250,246,241,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        .page-header { text-align: center; padding: 4rem 2rem 2rem; }
+        .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; }
+        .page-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* Category nav */
+        .faq-nav { display: flex; justify-content: center; gap: 1rem; padding: 1rem 2rem 2rem; flex-wrap: wrap; }
+        .faq-nav a { padding: 0.5rem 1.2rem; border: 1.5px solid var(--sand); border-radius: 100px; text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); transition: all 0.3s; }
+        .faq-nav a:hover { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
+
+        .faq-content { max-width: 750px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+        .faq-category { margin-bottom: 3rem; }
+        .faq-category h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--sand); }
+
+        .faq-item { border-bottom: 1px solid var(--sand); }
+        .faq-question { width: 100%; background: none; border: none; text-align: left; padding: 1.2rem 0; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text); display: flex; justify-content: space-between; align-items: center; transition: color 0.3s; }
+        .faq-question:hover { color: var(--terracotta); }
+        .faq-question .arrow { font-size: 1.2rem; transition: transform 0.3s; color: var(--terracotta); }
+        .faq-item.open .arrow { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+        .faq-item.open .faq-answer { max-height: 500px; padding-bottom: 1.2rem; }
+        .faq-answer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+        .faq-answer ul { list-style: none; margin: 0.5rem 0; }
+        .faq-answer li { font-size: 0.9rem; color: var(--text-muted); padding: 0.2rem 0; }
+        .faq-answer li::before { content: '→ '; color: var(--terracotta); }
+
+        /* Contact CTA */
+        .contact-cta { background: linear-gradient(135deg, var(--terracotta-light), var(--sage-light)); padding: 4rem 2rem; text-align: center; }
+        .contact-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .contact-cta p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .contact-methods { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .contact-method { padding: 1.5rem 2rem; background: white; border-radius: 12px; text-align: center; min-width: 200px; }
+        .contact-method .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .contact-method h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.3rem; }
+        .contact-method p { font-size: 0.8rem; color: var(--text-muted); }
+        .contact-method a { color: var(--terracotta); text-decoration: none; font-size: 0.85rem; }
+
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232,221,211,0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; } footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232,221,211,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232,221,211,0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232,221,211,0.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="announcement">Free shipping on orders above ₹1,999 · Handcrafted with love 🌿</div>
+<nav>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="sustainability.html">Values</a></li>
+        <li><a href="faq.html" class="active">Help</a></li>
+    </ul>
+    <a href="index.html" class="brand">ma<span>ya</span></a>
+    <div class="nav-icons">
+        <a href="#" title="Search">🔍</a>
+        <a href="#" title="Account">👤</a>
+        <a href="#" title="Cart">🛒</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know. Can't find your answer? We're just a DM away.</p>
+</div>
+
+<div class="faq-nav">
+    <a href="#shipping">Shipping</a>
+    <a href="#returns">Returns</a>
+    <a href="#sizing">Sizing</a>
+    <a href="#nursing">Nursing</a>
+    <a href="#fabric">Fabric & Care</a>
+    <a href="#orders">Orders</a>
+</div>
+
+<div class="faq-content">
+
+    <div class="faq-category" id="shipping">
+        <h2>Shipping & Delivery</h2>
+        <div class="faq-item">
+            <button class="faq-question">How long does delivery take? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>We ship within 2–3 business days. Standard delivery takes 5–7 business days across India. Metro cities typically receive orders in 3–5 days. We'll send you tracking details via WhatsApp and email.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Is shipping free? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Yes! We offer free shipping on all orders above ₹1,999. For orders below that, a flat ₹99 shipping fee applies. We ship via trusted partners like Delhivery and BlueDart.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Do you ship internationally? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Not yet, but we're working on it! We plan to launch international shipping to the US, UK, UAE, and Singapore by Q3 2026. Join our newsletter to be the first to know.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Can I track my order? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Absolutely! Once your order ships, you'll receive a WhatsApp message and email with a tracking link. You can also check order status by DMing us on Instagram.</p></div>
+        </div>
+    </div>
+
+    <div class="faq-category" id="returns">
+        <h2>Returns & Exchanges</h2>
+        <div class="faq-item">
+            <button class="faq-question">What's your return policy? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>We offer hassle-free returns within 7 days of delivery. Items must be unworn, unwashed, and with tags attached. Simply WhatsApp us and we'll arrange a pickup. Refunds are processed within 5–7 business days to your original payment method.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Can I exchange for a different size? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Yes! We offer free size exchanges within 7 days. Just reach out via WhatsApp or Instagram and we'll send the new size while picking up the original. Subject to availability.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">What if my item is damaged? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>We're so sorry if that happens! Please share photos of the damage via WhatsApp within 48 hours of delivery. We'll send a replacement immediately — no questions asked.</p></div>
+        </div>
+    </div>
+
+    <div class="faq-category" id="sizing">
+        <h2>Sizing & Fit</h2>
+        <div class="faq-item">
+            <button class="faq-question">Should I order my pre-pregnancy size? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>In most cases, yes! Our pieces are designed with generous ease and stretch to accommodate your growing bump. If you're in your third trimester and have gained significantly, consider sizing up. Check our <a href="size-guide.html" style="color:var(--terracotta)">detailed size guide</a> for trimester-specific advice.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">What sizes do you carry? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>We currently offer sizes XS to XXL (UK 6–18). Most of our pieces feature adjustable ties, elastic panels, and wrap silhouettes that provide flexibility within each size.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Can I get help choosing my size? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>We'd love to help! Send us your measurements and current trimester via WhatsApp (+91 98765 43210) or Instagram DM, and we'll personally recommend the perfect size for you.</p></div>
+        </div>
+    </div>
+
+    <div class="faq-category" id="nursing">
+        <h2>Nursing Access</h2>
+        <div class="faq-item">
+            <button class="faq-question">Which pieces have nursing access? <span class="arrow">+</span></button>
+            <div class="faq-answer">
+                <p>Our dedicated nursing collection features discreet access points. Look for pieces tagged "Nursing" in our shop. Additionally, many of our regular pieces work great for nursing:</p>
+                <ul>
+                    <li>Wrap tops and dresses — unwrap for easy access</li>
+                    <li>Button-down styles — unbutton from the top</li>
+                    <li>Kaftans — loose enough to pull aside comfortably</li>
+                </ul>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Can I wear Maya pieces postpartum? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Absolutely — that's the whole point! Our pieces are designed to transition from pregnancy through nursing and beyond. The adjustable ties and flowing silhouettes work beautifully at every stage. Many of our mamas tell us they wear their Maya pieces long after their babies are born.</p></div>
+        </div>
+    </div>
+
+    <div class="faq-category" id="fabric">
+        <h2>Fabric & Care</h2>
+        <div class="faq-item">
+            <button class="faq-question">What fabrics do you use? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>We use exclusively natural fibers — GOTS-certified organic cotton, handwoven linen, and Chanderi silk. No polyester, no synthetics, no microplastics. Our fabrics are breathable, gentle on sensitive pregnancy skin, and kind to the earth.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Are your dyes safe for pregnancy? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Yes! We use natural dyes and azo-free reactive dyes that are certified safe. Our block prints use vegetable-based inks. Everything is tested for skin safety and is completely safe during pregnancy and for newborn contact.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">How do I care for my Maya pieces? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Each piece comes with specific care instructions. Generally: wash cold, line dry in shade, iron on medium. For detailed fabric-specific care, check our <a href="care-guide.html" style="color:var(--terracotta)">complete care guide</a>.</p></div>
+        </div>
+    </div>
+
+    <div class="faq-category" id="orders">
+        <h2>Orders & Payment</h2>
+        <div class="faq-item">
+            <button class="faq-question">What payment methods do you accept? <span class="arrow">+</span></button>
+            <div class="faq-answer">
+                <p>We accept all major payment methods:</p>
+                <ul>
+                    <li>UPI (Google Pay, PhonePe, Paytm)</li>
+                    <li>Credit & Debit Cards (Visa, Mastercard, RuPay)</li>
+                    <li>Net Banking</li>
+                    <li>Cash on Delivery (₹49 COD fee)</li>
+                    <li>EMI options on orders above ₹3,000</li>
+                </ul>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Can I cancel my order? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>You can cancel within 12 hours of placing your order for a full refund. After that, if the order hasn't shipped yet, we'll try our best to cancel — just reach out quickly! Once shipped, you'll need to follow our return process.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Do you offer gift wrapping? <span class="arrow">+</span></button>
+            <div class="faq-answer"><p>Yes! Every Maya order already comes beautifully packaged in our signature kraft box with muslin wrapping. For an extra special touch, add our Gift Wrap option (₹149) for a handwritten note card and dried flower arrangement.</p></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Contact CTA -->
+<div class="contact-cta">
+    <h2>Still Have Questions?</h2>
+    <p>We're real humans and we reply fast. Promise.</p>
+    <div class="contact-methods">
+        <div class="contact-method">
+            <div class="icon">💬</div>
+            <h4>WhatsApp</h4>
+            <p>Fastest response</p>
+            <a href="#">+91 98765 43210</a>
+        </div>
+        <div class="contact-method">
+            <div class="icon">📸</div>
+            <h4>Instagram</h4>
+            <p>DM us anytime</p>
+            <a href="https://instagram.com/wearemaya">@wearemaya</a>
+        </div>
+        <div class="contact-method">
+            <div class="icon">✉️</div>
+            <h4>Email</h4>
+            <p>We reply within 24h</p>
+            <a href="mailto:hello@wearemaya.in">hello@wearemaya.in</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div><div class="footer-brand">ma<span>ya</span></div><p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p></div>
+        <div><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html#dresses">Dresses</a></li><li><a href="shop.html#tops">Tops & Kurtis</a></li><li><a href="shop.html#coords">Co-ord Sets</a></li><li><a href="shop.html#nursing">Nursing Wear</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="size-guide.html">Size Guide</a></li><li><a href="care-guide.html">Care Guide</a></li></ul></div>
+        <div><h4>Help</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="faq.html#shipping">Shipping & Returns</a></li><li><a href="faq.html#sizing">Sizing Help</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Maya. All rights reserved.</span><span>Made with 🌿 in India</span></div>
+</footer>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const wasOpen = item.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
+
+    // Open from hash
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
