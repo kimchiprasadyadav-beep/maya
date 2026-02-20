@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Birth Plan Style — Maya</title>
+    <meta name="description" content="Take our 2-minute quiz to discover your ideal birth plan style. Personalized recommendations for conscious mamas.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FAF6F1; --warm-white: #FFF9F2; --sand: #E8DDD3;
+            --terracotta: #C4774C; --terracotta-light: rgba(196, 119, 76, 0.1);
+            --sage: #8B9E7E; --sage-light: rgba(139, 158, 126, 0.1);
+            --charcoal: #2C2C2C; --text: #3D3530; --text-muted: #8B7E74; --gold: #B8955A;
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+        ::selection { background: var(--terracotta); color: white; }
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(250, 246, 241, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--sand); padding: 1rem 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+
+        .container { max-width: 650px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+        .hero { text-align: center; margin-bottom: 3rem; }
+        .hero-badge { display: inline-block; background: var(--terracotta-light); color: var(--terracotta); padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Progress */
+        .progress-bar { height: 3px; background: var(--sand); border-radius: 3px; margin-bottom: 2.5rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--terracotta); transition: width 0.4s ease; border-radius: 3px; }
+
+        /* Question */
+        .question-card {
+            background: white; border-radius: 16px; padding: 2.5rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+            animation: slideIn 0.4s ease;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .question-num { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; }
+        .question-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .options { display: flex; flex-direction: column; gap: 0.8rem; }
+        .option {
+            padding: 1rem 1.3rem; border: 1px solid var(--sand); border-radius: 10px;
+            cursor: pointer; transition: all 0.3s; font-size: 0.95rem;
+        }
+        .option:hover { border-color: var(--terracotta); background: var(--terracotta-light); }
+        .option.selected { border-color: var(--terracotta); background: var(--terracotta-light); }
+
+        /* Result */
+        .result-card { display: none; background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 30px rgba(0,0,0,0.04); }
+        .result-card.show { display: block; animation: slideIn 0.4s ease; }
+        .result-type { text-align: center; margin-bottom: 2rem; }
+        .result-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
+        .result-type h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--terracotta); }
+        .result-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+        .reco-list { list-style: none; margin-bottom: 2rem; }
+        .reco-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--sand); font-size: 0.95rem; }
+        .reco-list li::before { content: '→ '; color: var(--terracotta); font-weight: 500; }
+
+        .email-capture { background: var(--sage-light); border-radius: 12px; padding: 2rem; text-align: center; }
+        .email-capture h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .email-capture p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+        .email-row { display: flex; gap: 0.8rem; }
+        .email-row input { flex: 1; padding: 0.8rem 1rem; border: 1px solid var(--sand); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; background: white; }
+        .email-row input:focus { outline: none; border-color: var(--terracotta); }
+        .btn { padding: 0.8rem 1.5rem; background: var(--terracotta); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem; transition: background 0.3s; }
+        .btn:hover { background: #b36a40; }
+        .success-msg { display: none; color: var(--sage); font-weight: 500; margin-top: 1rem; }
+
+        footer { text-align: center; padding: 3rem 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--sand); margin-top: 4rem; }
+        footer a { color: var(--terracotta); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .email-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="brand">ma<span>y</span>a</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="guides.html">Free Guides</a></li>
+            <li><a href="maya-care.html">Maya Care ✨</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-badge">🌙 2-Minute Quiz</div>
+            <h1>Discover Your<br>Birth Plan Style</h1>
+            <p>Answer 8 questions. Get a personalised birth plan approach that feels right for you.</p>
+        </div>
+
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+
+        <div id="quizArea"></div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-type">
+                <div class="result-emoji" id="resultEmoji"></div>
+                <h2 id="resultTitle"></h2>
+            </div>
+            <p class="result-desc" id="resultDesc"></p>
+            <h4 style="font-size:0.8rem; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.8rem;">Recommended for you</h4>
+            <ul class="reco-list" id="recoList"></ul>
+
+            <div class="email-capture">
+                <h3>Get Your Full Birth Plan PDF</h3>
+                <p>We'll send a beautifully designed, printable birth plan checklist based on your style — free.</p>
+                <form onsubmit="captureEmail(event)">
+                    <div class="email-row">
+                        <input type="email" placeholder="your@email.com" id="emailInput" required>
+                        <button type="submit" class="btn">Send My Plan</button>
+                    </div>
+                </form>
+                <div class="success-msg" id="successMsg">✨ Your birth plan is on its way! Check your inbox.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with 💛 by <a href="index.html">Maya</a> — Bohemian maternity wear for the free-spirited mama</p>
+    </footer>
+
+    <script>
+        const questions = [
+            { q: "How do you feel about medical interventions?", opts: [
+                { text: "I'd like to avoid them unless absolutely necessary", type: "natural" },
+                { text: "I'm open to them if recommended by my doctor", type: "balanced" },
+                { text: "Give me all the pain relief available, please!", type: "medical" },
+                { text: "I want to understand each option fully before deciding", type: "informed" }
+            ]},
+            { q: "What kind of environment feels most calming to you?", opts: [
+                { text: "Dim lights, candles, soft music", type: "natural" },
+                { text: "A clean, well-equipped hospital room", type: "medical" },
+                { text: "My own bedroom or a home-like setting", type: "natural" },
+                { text: "Wherever my support team is — the people matter most", type: "balanced" }
+            ]},
+            { q: "How do you typically handle pain?", opts: [
+                { text: "Breathing, meditation, mental focus", type: "natural" },
+                { text: "I prefer not to suffer unnecessarily — give me options", type: "medical" },
+                { text: "Movement helps — walking, swaying, water", type: "natural" },
+                { text: "I'd like a mix of natural + medical relief", type: "balanced" }
+            ]},
+            { q: "What matters most to you about the birth experience?", opts: [
+                { text: "Feeling in control and empowered", type: "informed" },
+                { text: "A healthy baby — everything else is secondary", type: "medical" },
+                { text: "A spiritual, transformative experience", type: "natural" },
+                { text: "Feeling supported and heard by my care team", type: "balanced" }
+            ]},
+            { q: "Who would you want in the delivery room?", opts: [
+                { text: "My partner + a doula", type: "natural" },
+                { text: "My partner + my mother/MIL", type: "balanced" },
+                { text: "Just my partner — intimate and private", type: "informed" },
+                { text: "My doctor and whoever they recommend", type: "medical" }
+            ]},
+            { q: "How do you feel about a birth plan changing last minute?", opts: [
+                { text: "I'd be disappointed but can adapt", type: "natural" },
+                { text: "Totally fine — flexibility is key", type: "balanced" },
+                { text: "As long as baby is safe, I'm okay", type: "medical" },
+                { text: "I'd want to understand why and be part of the decision", type: "informed" }
+            ]},
+            { q: "What's your approach to postpartum recovery?", opts: [
+                { text: "Ayurvedic — japa, warm foods, oil massages", type: "natural" },
+                { text: "Modern + traditional — a blend of both", type: "balanced" },
+                { text: "Evidence-based — I'll follow my doctor's advice", type: "medical" },
+                { text: "Whatever helps me recover fastest so I can bond with baby", type: "informed" }
+            ]},
+            { q: "How important is immediate skin-to-skin contact after birth?", opts: [
+                { text: "Non-negotiable — it's the first thing I want", type: "natural" },
+                { text: "Very important, but I trust my doctor's judgment", type: "balanced" },
+                { text: "I'd like it if medically possible", type: "medical" },
+                { text: "Essential — I've researched the benefits extensively", type: "informed" }
+            ]}
+        ];
+
+        const results = {
+            natural: {
+                emoji: "🌿", title: "The Nature-Led Mama",
+                desc: "You're drawn to a birth experience that honours your body's natural wisdom. You trust the process and want minimal interference. Consider exploring HypnoBirthing, water birth options, or a birthing centre. A doula would be a wonderful addition to your support team.",
+                recos: ["Explore HypnoBirthing classes in your city", "Interview doulas — find one who matches your energy", "Consider a birthing centre or hospital with water birth", "Create a sensory birth kit: playlist, essential oils, fairy lights", "Practice prenatal yoga and breathing techniques daily", "Discuss your preferences openly with your OB-GYN"]
+            },
+            balanced: {
+                emoji: "⚖️", title: "The Flexible Flow Mama",
+                desc: "You're beautifully balanced — open to nature's course but grateful for modern medicine when needed. You value support, warmth, and going with the flow. Your ideal birth plan has preferences, not rigid rules.",
+                recos: ["Write a flexible birth preference list (not a strict plan)", "Choose a hospital that supports both natural and medical options", "Consider a doula for continuous support", "Prepare for multiple scenarios — you'll handle anything", "Take a comprehensive childbirth education class", "Build a support team you trust completely"]
+            },
+            medical: {
+                emoji: "🏥", title: "The Safety-First Mama",
+                desc: "Your priority is clear: a healthy mama and a healthy baby. You trust medical expertise and want access to the best interventions available. There's zero shame in wanting an epidural, a planned C-section, or the full support of a medical team.",
+                recos: ["Choose a hospital with a top-rated NICU", "Discuss pain management options with your OB early", "Tour the labour ward and understand the facilities", "Prepare for a C-section even if planning vaginal — just in case", "Focus your birth plan on postpartum preferences", "Invest in good postpartum care and recovery support"]
+            },
+            informed: {
+                emoji: "📚", title: "The Research-Driven Mama",
+                desc: "Knowledge is your superpower. You want to understand every option, every intervention, every possibility before making decisions. You're the mama who reads studies, asks questions, and advocates for herself beautifully.",
+                recos: ["Take an evidence-based childbirth course (Evidence Based Birth)", "Prepare a detailed birth preference document", "Find an OB who welcomes questions and discussions", "Consider hiring a doula who's also an educator", "Join communities of like-minded informed mothers", "Create a decision tree for various birth scenarios"]
+            }
+        };
+
+        let current = 0;
+        let scores = { natural: 0, balanced: 0, medical: 0, informed: 0 };
+
+        function renderQuestion() {
+            const q = questions[current];
+            const area = document.getElementById('quizArea');
+            area.innerHTML = `
+                <div class="question-card">
+                    <div class="question-num">Question ${current + 1} of ${questions.length}</div>
+                    <h2>${q.q}</h2>
+                    <div class="options">
+                        ${q.opts.map((o, i) => `<div class="option" onclick="answer('${o.type}', this)">${o.text}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+            document.getElementById('progress').style.width = `${(current / questions.length) * 100}%`;
+        }
+
+        function answer(type, el) {
+            if (el.classList.contains('selected')) return;
+            el.classList.add('selected');
+            scores[type]++;
+            setTimeout(() => {
+                current++;
+                if (current < questions.length) {
+                    renderQuestion();
+                } else {
+                    showResult();
+                }
+            }, 400);
+        }
+
+        function showResult() {
+            document.getElementById('quizArea').innerHTML = '';
+            document.getElementById('progress').style.width = '100%';
+            const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+            const r = results[winner];
+            document.getElementById('resultEmoji').textContent = r.emoji;
+            document.getElementById('resultTitle').textContent = r.title;
+            document.getElementById('resultDesc').textContent = r.desc;
+            document.getElementById('recoList').innerHTML = r.recos.map(x => `<li>${x}</li>`).join('');
+            document.getElementById('resultCard').classList.add('show');
+
+            localStorage.setItem('maya_birth_quiz', JSON.stringify({
+                type: winner, scores, completedAt: new Date().toISOString()
+            }));
+        }
+
+        function captureEmail(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const stored = JSON.parse(localStorage.getItem('maya_birth_quiz') || '{}');
+            stored.email = email;
+            localStorage.setItem('maya_birth_quiz', JSON.stringify(stored));
+            document.querySelector('.email-capture form').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        }
+
+        renderQuestion();
+    </script>
+</body>
+</html>

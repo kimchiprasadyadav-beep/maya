@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Due Date Calculator — Maya</title>
+    <meta name="description" content="Calculate your due date and see your beautiful pregnancy timeline, week by week.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FAF6F1; --warm-white: #FFF9F2; --sand: #E8DDD3;
+            --terracotta: #C4774C; --terracotta-light: rgba(196, 119, 76, 0.1);
+            --sage: #8B9E7E; --sage-light: rgba(139, 158, 126, 0.1);
+            --charcoal: #2C2C2C; --text: #3D3530; --text-muted: #8B7E74;
+            --gold: #B8955A;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+        ::selection { background: var(--terracotta); color: white; }
+
+        /* Nav */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(250, 246, 241, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--sand); padding: 1rem 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-muted); font-size: 0.8rem;
+            letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--terracotta); }
+        .brand {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+            font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none;
+        }
+        .brand span { color: var(--terracotta); }
+
+        /* Hero */
+        .hero {
+            text-align: center; padding: 5rem 2rem 3rem;
+            max-width: 700px; margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block; background: var(--sage-light); color: var(--sage);
+            padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.75rem;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif; font-size: 3rem;
+            font-weight: 300; line-height: 1.2; margin-bottom: 1rem;
+        }
+        .hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto; }
+
+        /* Calculator */
+        .calc-section {
+            max-width: 600px; margin: 2rem auto 4rem; padding: 0 2rem;
+        }
+        .calc-card {
+            background: white; border-radius: 16px; padding: 2.5rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block; font-size: 0.8rem; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group select {
+            width: 100%; padding: 0.9rem 1.2rem; border: 1px solid var(--sand);
+            border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 1rem;
+            background: var(--cream); color: var(--text); transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none; border-color: var(--terracotta);
+        }
+        .btn-primary {
+            width: 100%; padding: 1rem; background: var(--terracotta); color: white;
+            border: none; border-radius: 8px; font-family: 'Outfit', sans-serif;
+            font-size: 1rem; letter-spacing: 1px; cursor: pointer;
+            transition: all 0.3s; text-transform: uppercase;
+        }
+        .btn-primary:hover { background: #b36a40; transform: translateY(-1px); }
+
+        /* Results */
+        .results { display: none; }
+        .results.show { display: block; }
+        .due-date-display {
+            text-align: center; padding: 2.5rem; background: var(--terracotta-light);
+            border-radius: 16px; margin-bottom: 2rem;
+        }
+        .due-date-display .emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .due-date-display h2 {
+            font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+            font-weight: 400; color: var(--terracotta);
+        }
+        .due-date-display p { color: var(--text-muted); margin-top: 0.3rem; }
+        .stat-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat {
+            text-align: center; padding: 1.2rem; background: white;
+            border-radius: 12px; border: 1px solid var(--sand);
+        }
+        .stat .num {
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+            color: var(--terracotta); font-weight: 500;
+        }
+        .stat .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Timeline */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(to bottom, var(--terracotta), var(--sage), var(--gold));
+        }
+        .timeline-item {
+            position: relative; margin-bottom: 1.5rem; padding: 1.2rem 1.5rem;
+            background: white; border-radius: 12px; border: 1px solid var(--sand);
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -1.75rem; top: 1.5rem;
+            width: 10px; height: 10px; border-radius: 50%; background: var(--terracotta);
+        }
+        .timeline-item.current { border-color: var(--terracotta); background: var(--terracotta-light); }
+        .timeline-item.current::before { width: 14px; height: 14px; left: -1.85rem; box-shadow: 0 0 0 4px rgba(196,119,76,0.2); }
+        .timeline-item.future { opacity: 0.6; }
+        .timeline-item h3 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500;
+        }
+        .timeline-item .week-range { font-size: 0.8rem; color: var(--text-muted); }
+        .timeline-item .details { font-size: 0.9rem; margin-top: 0.4rem; }
+
+        /* Email capture */
+        .email-capture {
+            background: var(--sage-light); border-radius: 16px; padding: 2.5rem;
+            text-align: center; margin-top: 2.5rem;
+        }
+        .email-capture h3 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.5rem;
+        }
+        .email-capture p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .email-row { display: flex; gap: 0.8rem; max-width: 450px; margin: 0 auto; }
+        .email-row input { flex: 1; }
+        .email-row .btn-primary { width: auto; padding: 0.9rem 2rem; }
+        .email-success { display: none; color: var(--sage); font-weight: 500; margin-top: 1rem; }
+
+        /* Footer */
+        footer {
+            text-align: center; padding: 3rem 2rem; color: var(--text-muted);
+            font-size: 0.8rem; border-top: 1px solid var(--sand); margin-top: 4rem;
+        }
+        footer a { color: var(--terracotta); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .stat-row { grid-template-columns: 1fr; }
+            .email-row { flex-direction: column; }
+            .email-row .btn-primary { width: 100%; }
+        }
+
+        /* Animations */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="brand">ma<span>y</span>a</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="guides.html">Free Guides</a></li>
+            <li><a href="maya-care.html">Maya Care ✨</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-badge">✨ Free Tool</div>
+        <h1>When Will You<br>Meet Your Little One?</h1>
+        <p>Enter your last period date and we'll create a beautiful pregnancy timeline — just for you.</p>
+    </section>
+
+    <section class="calc-section">
+        <div class="calc-card" id="calculatorForm">
+            <div class="form-group">
+                <label>First Day of Last Menstrual Period</label>
+                <input type="date" id="lmpDate">
+            </div>
+            <div class="form-group">
+                <label>Your City</label>
+                <select id="city">
+                    <option value="">Select your city</option>
+                    <option>Mumbai</option><option>Delhi NCR</option>
+                    <option>Bangalore</option><option>Hyderabad</option>
+                    <option>Chennai</option><option>Pune</option>
+                    <option>Kolkata</option><option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Is this your first pregnancy?</label>
+                <select id="firstPregnancy">
+                    <option value="yes">Yes, first time! 🎉</option>
+                    <option value="no">No, been here before 💛</option>
+                </select>
+            </div>
+            <button class="btn-primary" onclick="calculate()">Calculate My Due Date →</button>
+        </div>
+
+        <div class="results" id="results">
+            <div class="due-date-display fade-in">
+                <div class="emoji">🌸</div>
+                <h2 id="dueDateText"></h2>
+                <p id="dueDateSub"></p>
+            </div>
+
+            <div class="stat-row fade-in">
+                <div class="stat">
+                    <div class="num" id="weeksNow">—</div>
+                    <div class="label">Weeks Today</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="daysLeft">—</div>
+                    <div class="label">Days to Go</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="trimester">—</div>
+                    <div class="label">Trimester</div>
+                </div>
+            </div>
+
+            <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; margin-bottom:1.5rem;" class="fade-in">Your Pregnancy Journey</h3>
+
+            <div class="timeline fade-in" id="timeline"></div>
+
+            <div class="email-capture fade-in">
+                <h3>Save Your Timeline</h3>
+                <p>Get your full pregnancy timeline + weekly tips delivered to your inbox. Curated for conscious mamas.</p>
+                <form id="emailForm" onsubmit="captureEmail(event)">
+                    <div class="email-row">
+                        <input type="email" placeholder="your@email.com" id="emailInput" required>
+                        <button type="submit" class="btn-primary">Save</button>
+                    </div>
+                </form>
+                <div class="email-success" id="emailSuccess">✨ Saved! Check your inbox for your full timeline.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with 💛 by <a href="index.html">Maya</a> — Bohemian maternity wear for the free-spirited mama</p>
+    </footer>
+
+    <script>
+        const milestones = [
+            { week: 4, title: "Tiny Beginning", emoji: "🫧", detail: "Your baby is the size of a poppy seed. The heart begins to form." },
+            { week: 8, title: "Little Berry", emoji: "🫐", detail: "Fingers and toes are forming. Baby is the size of a raspberry." },
+            { week: 12, title: "First Trimester Complete", emoji: "🎉", detail: "Baby can open and close fists. Time to share the news!" },
+            { week: 16, title: "Sweet Flutter", emoji: "🦋", detail: "You might feel first movements. Baby is the size of an avocado." },
+            { week: 20, title: "Halfway There", emoji: "🌟", detail: "Anatomy scan time! You might learn the gender." },
+            { week: 24, title: "Viability Milestone", emoji: "💪", detail: "Baby can hear your voice now. Start talking and singing!" },
+            { week: 28, title: "Third Trimester Begins", emoji: "🌺", detail: "Baby is dreaming! Eyes can open and close." },
+            { week: 32, title: "Getting Ready", emoji: "🧸", detail: "Baby is practising breathing. Time to pack your hospital bag." },
+            { week: 36, title: "Almost Time", emoji: "🌙", detail: "Baby is head-down (hopefully!). You're in the home stretch." },
+            { week: 40, title: "Due Date", emoji: "🌸", detail: "Your little one is ready to meet the world!" },
+        ];
+
+        function calculate() {
+            const lmpInput = document.getElementById('lmpDate').value;
+            if (!lmpInput) { alert('Please enter your LMP date'); return; }
+
+            const lmp = new Date(lmpInput);
+            const today = new Date();
+            const dueDate = new Date(lmp);
+            dueDate.setDate(dueDate.getDate() + 280);
+
+            const diffMs = today - lmp;
+            const totalDays = Math.floor(diffMs / 86400000);
+            const weeks = Math.floor(totalDays / 7);
+            const days = totalDays % 7;
+            const daysRemaining = Math.max(0, Math.ceil((dueDate - today) / 86400000));
+            const tri = weeks < 13 ? '1st' : weeks < 27 ? '2nd' : '3rd';
+
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('dueDateText').textContent = dueDate.toLocaleDateString('en-IN', options);
+            document.getElementById('dueDateSub').textContent = `You're ${weeks} weeks and ${days} days along`;
+            document.getElementById('weeksNow').textContent = weeks;
+            document.getElementById('daysLeft').textContent = daysRemaining;
+            document.getElementById('trimester').textContent = tri;
+
+            // Build timeline
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+            milestones.forEach(m => {
+                const mDate = new Date(lmp);
+                mDate.setDate(mDate.getDate() + m.week * 7);
+                const isCurrent = weeks >= m.week - 2 && weeks <= m.week + 1;
+                const isFuture = weeks < m.week - 2;
+                const div = document.createElement('div');
+                div.className = `timeline-item${isCurrent ? ' current' : ''}${isFuture ? ' future' : ''}`;
+                div.innerHTML = `
+                    <h3>${m.emoji} Week ${m.week} — ${m.title}</h3>
+                    <div class="week-range">${mDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</div>
+                    <div class="details">${m.detail}</div>
+                `;
+                timeline.appendChild(div);
+            });
+
+            document.getElementById('results').classList.add('show');
+
+            // Store data locally
+            const data = {
+                lmp: lmpInput,
+                dueDate: dueDate.toISOString(),
+                city: document.getElementById('city').value,
+                firstPregnancy: document.getElementById('firstPregnancy').value,
+                createdAt: new Date().toISOString()
+            };
+            localStorage.setItem('maya_due_date', JSON.stringify(data));
+
+            // Animate
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach((el, i) => {
+                    setTimeout(() => el.classList.add('visible'), i * 150);
+                });
+            }, 100);
+        }
+
+        function captureEmail(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const stored = JSON.parse(localStorage.getItem('maya_due_date') || '{}');
+            stored.email = email;
+            localStorage.setItem('maya_due_date', JSON.stringify(stored));
+            // TODO: Wire to Formspree or backend
+            // fetch('https://formspree.io/f/xformid', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(stored) });
+            document.getElementById('emailForm').style.display = 'none';
+            document.getElementById('emailSuccess').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

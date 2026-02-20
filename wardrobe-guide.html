@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Maternity Capsule Wardrobe Guide — Maya</title>
+    <meta name="description" content="Build a ₹50K maternity wardrobe that takes you from boardroom to baby shower. Curated by Maya.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FAF6F1; --sand: #E8DDD3;
+            --terracotta: #C4774C; --terracotta-light: rgba(196, 119, 76, 0.1);
+            --sage: #8B9E7E; --sage-light: rgba(139, 158, 126, 0.1);
+            --text: #3D3530; --text-muted: #8B7E74; --gold: #B8955A;
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+        ::selection { background: var(--terracotta); color: white; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 246, 241, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+
+        .container { max-width: 750px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+        .hero { text-align: center; margin-bottom: 3rem; }
+        .hero-badge { display: inline-block; background: var(--terracotta-light); color: var(--terracotta); padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 550px; margin: 0 auto; }
+
+        /* Gate */
+        .gate { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 30px rgba(0,0,0,0.04); text-align: center; max-width: 500px; margin: 0 auto; }
+        .gate h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .gate p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .fg { margin-bottom: 1rem; text-align: left; }
+        .fg label { display: block; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .fg input, .fg select { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--sand); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; background: var(--cream); }
+        .fg input:focus, .fg select:focus { outline: none; border-color: var(--terracotta); }
+        .btn { width: 100%; padding: 1rem; background: var(--terracotta); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; font-size: 0.95rem; transition: all 0.3s; }
+        .btn:hover { background: #b36a40; }
+
+        /* Guide content */
+        .guide { display: none; }
+        .guide.show { display: block; }
+
+        .intro-card { background: white; border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 15px rgba(0,0,0,0.03); }
+        .intro-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .intro-card p { color: var(--text-muted); }
+
+        .rule-card { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1.5rem; animation: fadeUp 0.5s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .rule-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--terracotta); line-height: 1; min-width: 40px; }
+        .rule-content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .rule-content p { font-size: 0.9rem; color: var(--text-muted); }
+
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin: 3rem 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--sand); }
+
+        .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .wardrobe-item { background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--sand); }
+        .wardrobe-item .emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+        .wardrobe-item h4 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+        .wardrobe-item .price { color: var(--terracotta); font-size: 0.85rem; font-weight: 500; }
+        .wardrobe-item .why { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; }
+        .wardrobe-item .brands { font-size: 0.75rem; color: var(--sage); margin-top: 0.3rem; }
+
+        .skip-section { background: var(--terracotta-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .skip-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 1rem; color: var(--terracotta); }
+        .skip-item { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .skip-item::before { content: '✕'; color: var(--terracotta); font-weight: bold; }
+
+        .total-card { background: white; border-radius: 16px; padding: 2rem; text-align: center; border: 2px solid var(--gold); margin: 2rem 0; }
+        .total-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; }
+        .total-card .amount { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--terracotta); margin: 0.5rem 0; }
+        .total-card p { color: var(--text-muted); font-size: 0.85rem; }
+
+        .cta-card { background: var(--sage-light); border-radius: 16px; padding: 2.5rem; text-align: center; margin-top: 3rem; }
+        .cta-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .cta-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+        .cta-card .btn { max-width: 300px; margin: 0 auto; display: block; }
+
+        footer { text-align: center; padding: 3rem 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--sand); margin-top: 4rem; }
+        footer a { color: var(--terracotta); text-decoration: none; }
+        @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hero h1 { font-size: 2rem; } .item-grid { grid-template-columns: 1fr; } .rule-card { flex-direction: column; gap: 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="brand">ma<span>y</span>a</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="guides.html">Free Guides</a></li>
+            <li><a href="maya-care.html">Maya Care ✨</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-badge">👗 Style Guide</div>
+            <h1>The ₹50K Maternity<br>Capsule Wardrobe</h1>
+            <p>15 pieces. 40 weeks. Endless combinations. Look like yourself — not like you raided your husband's closet.</p>
+        </div>
+
+        <div class="gate" id="gate">
+            <h3>Get Your Personalised Guide</h3>
+            <p>We'll tailor recommendations to your trimester and style.</p>
+            <form onsubmit="unlockGuide(event)">
+                <div class="fg"><label>Email</label><input type="email" id="emailInput" placeholder="your@email.com" required></div>
+                <div class="fg"><label>Current Stage</label>
+                    <select id="stage"><option value="planning">Planning / TTC</option><option value="t1">First Trimester</option><option value="t2">Second Trimester</option><option value="t3">Third Trimester</option><option value="pp">Postpartum</option></select>
+                </div>
+                <div class="fg"><label>Your Style Vibe</label>
+                    <select id="style"><option value="minimal">Minimal & Clean</option><option value="boho">Bohemian & Earthy</option><option value="classic">Classic & Polished</option><option value="edgy">Modern & Edgy</option></select>
+                </div>
+                <button type="submit" class="btn">Show Me the Wardrobe →</button>
+            </form>
+        </div>
+
+        <div class="guide" id="guide">
+            <div class="intro-card">
+                <h2>The Philosophy</h2>
+                <p>Maternity fashion isn't about "making do" for 9 months. It's about honouring this extraordinary chapter of your body's story. Every piece here earns its place — versatile enough for work, beautiful enough for a babymoon, comfortable enough for 3 AM cravings.</p>
+            </div>
+
+            <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; margin-bottom:1.5rem;">The 5 Golden Rules</h3>
+
+            <div class="rule-card"><div class="rule-num">01</div><div class="rule-content"><h3>Buy for the bump, style for yourself</h3><p>Your aesthetic doesn't change because you're pregnant. Your silhouettes do. Find maternity versions of what you already love.</p></div></div>
+            <div class="rule-card"><div class="rule-num">02</div><div class="rule-content"><h3>Invest in bottoms, experiment with tops</h3><p>Good maternity jeans and pants are worth every rupee. Tops are easier to improvise with oversized non-maternity options.</p></div></div>
+            <div class="rule-card"><div class="rule-num">03</div><div class="rule-content"><h3>Natural fabrics only</h3><p>Cotton, linen, bamboo, modal. Your body is running 2°C hotter. Polyester is the enemy.</p></div></div>
+            <div class="rule-card"><div class="rule-num">04</div><div class="rule-content"><h3>Think nursing-friendly from Month 7</h3><p>Button-downs, wrap dresses, and front-access tops will serve you for months after delivery too.</p></div></div>
+            <div class="rule-card"><div class="rule-num">05</div><div class="rule-content"><h3>Neutral base + statement pieces</h3><p>Build in cream, black, olive, and terracotta. Add personality with one or two printed pieces and accessories.</p></div></div>
+
+            <h2 class="section-title">The 15-Piece Wardrobe</h2>
+
+            <h3 style="font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Bottoms — The Foundation</h3>
+            <div class="item-grid">
+                <div class="wardrobe-item"><div class="emoji">👖</div><h4>Maternity Jeans (dark wash)</h4><div class="price">₹3,500 – ₹5,000</div><div class="why">The workhorse. Over-belly band for support.</div><div class="brands">H&M Mama, Morph, The Mom Store</div></div>
+                <div class="wardrobe-item"><div class="emoji">🩳</div><h4>Maternity Palazzo Pants (black)</h4><div class="price">₹1,500 – ₹2,500</div><div class="why">Dress up or down. Works till delivery day.</div><div class="brands">Morph, Zivame, FabIndia</div></div>
+                <div class="wardrobe-item"><div class="emoji">🧶</div><h4>Cotton Leggings (2 pairs)</h4><div class="price">₹800 – ₹1,200 each</div><div class="why">Under kurtis, with long tops, for yoga.</div><div class="brands">Enamor, Clovia</div></div>
+            </div>
+
+            <h3 style="font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Tops & Dresses — The Stars</h3>
+            <div class="item-grid">
+                <div class="wardrobe-item"><div class="emoji">👗</div><h4>Wrap Dress (earthy print)</h4><div class="price">₹3,000 – ₹5,000</div><div class="why">Adjusts to every stage. Nursing-friendly. Photo-ready.</div><div class="brands">Maya, Nicobar, The Label Life</div></div>
+                <div class="wardrobe-item"><div class="emoji">👕</div><h4>Oversized Linen Shirt (white)</h4><div class="price">₹2,000 – ₹3,500</div><div class="why">Over jeans, as a beach coverup, with a belt.</div><div class="brands">Uniqlo, Muji, FabIndia</div></div>
+                <div class="wardrobe-item"><div class="emoji">🧥</div><h4>Long Cotton Kurti (block print)</h4><div class="price">₹2,000 – ₹3,500</div><div class="why">For family gatherings. Indian occasions sorted.</div><div class="brands">FabIndia, Jaypore, Nicobar</div></div>
+                <div class="wardrobe-item"><div class="emoji">✨</div><h4>Nursing-Friendly Button-Down</h4><div class="price">₹2,000 – ₹3,000</div><div class="why">Works during pregnancy AND after. Smart investment.</div><div class="brands">Maya, Morph Maternity</div></div>
+                <div class="wardrobe-item"><div class="emoji">🌊</div><h4>Ribbed Tank Tops (3 pack)</h4><div class="price">₹1,500 – ₹2,500</div><div class="why">Layer under everything. Neutral colours.</div><div class="brands">H&M, Uniqlo, Zara</div></div>
+                <div class="wardrobe-item"><div class="emoji">🌸</div><h4>Maxi Dress (solid or subtle print)</h4><div class="price">₹3,000 – ₹4,500</div><div class="why">Babymoon-ready. Effortless elegance.</div><div class="brands">Maya, Nicobar, AND</div></div>
+                <div class="wardrobe-item"><div class="emoji">🧘</div><h4>Soft Jogger Set</h4><div class="price">₹2,500 – ₹3,500</div><div class="why">WFH uniform. Hospital-worthy comfort.</div><div class="brands">Nykaa Fashion, H&M</div></div>
+            </div>
+
+            <h3 style="font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Essentials</h3>
+            <div class="item-grid">
+                <div class="wardrobe-item"><div class="emoji">👙</div><h4>Maternity Bras (2)</h4><div class="price">₹1,500 – ₹2,500 each</div><div class="why">Wire-free, supportive, grows with you.</div><div class="brands">Enamor, Morph, Clovia</div></div>
+                <div class="wardrobe-item"><div class="emoji">🧣</div><h4>Belly Band / Support Belt</h4><div class="price">₹800 – ₹1,500</div><div class="why">Extends pre-pregnancy pants + back support.</div><div class="brands">The Mom Store, Morph</div></div>
+            </div>
+
+            <div class="total-card">
+                <h3>Total Investment</h3>
+                <div class="amount">~₹35K – ₹50K</div>
+                <p>15 pieces that create 30+ outfits across all 3 trimesters + postpartum</p>
+            </div>
+
+            <div class="skip-section">
+                <h3>What NOT to Buy</h3>
+                <div class="skip-item">Maternity-specific formal blazers — use your pre-pregnancy ones open</div>
+                <div class="skip-item">Too many "funny pregnancy" tees — one is enough</div>
+                <div class="skip-item">Tight bodycon maternity dresses — they'll fit for 3 weeks</div>
+                <div class="skip-item">Synthetic fabrics — your body will revolt</div>
+                <div class="skip-item">More than 2 pairs of maternity jeans — you won't wear them postpartum</div>
+                <div class="skip-item">Anything you'd be embarrassed to wear on a video call</div>
+            </div>
+
+            <div class="cta-card">
+                <h3>Ready to Build Your Wardrobe?</h3>
+                <p>Browse Maya's collection of bohemian maternity wear — designed to be the star pieces of your capsule.</p>
+                <a href="shop.html" class="btn" style="text-decoration:none; display:inline-block;">Shop Maya →</a>
+            </div>
+        </div>
+    </div>
+
+    <footer><p>Made with 💛 by <a href="index.html">Maya</a> — Bohemian maternity wear for the free-spirited mama</p></footer>
+
+    <script>
+        function unlockGuide(e) {
+            e.preventDefault();
+            const data = {
+                email: document.getElementById('emailInput').value,
+                stage: document.getElementById('stage').value,
+                style: document.getElementById('style').value,
+                createdAt: new Date().toISOString()
+            };
+            localStorage.setItem('maya_wardrobe', JSON.stringify(data));
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('guide').classList.add('show');
+        }
+        if (localStorage.getItem('maya_wardrobe')) {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('guide').classList.add('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Name Explorer — Maya</title>
+    <meta name="description" content="Discover meaningful Indian baby names. Filter by origin, meaning, and starting letter. Curated for conscious parents.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FAF6F1; --sand: #E8DDD3;
+            --terracotta: #C4774C; --terracotta-light: rgba(196, 119, 76, 0.1);
+            --sage: #8B9E7E; --sage-light: rgba(139, 158, 126, 0.1);
+            --text: #3D3530; --text-muted: #8B7E74; --gold: #B8955A;
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+        ::selection { background: var(--terracotta); color: white; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 246, 241, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+        .hero { text-align: center; margin-bottom: 2.5rem; }
+        .hero-badge { display: inline-block; background: var(--terracotta-light); color: var(--terracotta); padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Filters */
+        .filters { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .filter-btn { padding: 0.5rem 1.2rem; border: 1px solid var(--sand); border-radius: 50px; background: white; font-family: 'Outfit', sans-serif; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; color: var(--text-muted); }
+        .filter-btn:hover, .filter-btn.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+        .search-box { width: 100%; padding: 0.9rem 1.2rem; border: 1px solid var(--sand); border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 1rem; background: white; margin-bottom: 1.5rem; }
+        .search-box:focus { outline: none; border-color: var(--terracotta); }
+
+        .gender-toggle { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .gender-btn { padding: 0.6rem 1.5rem; border: 1px solid var(--sand); border-radius: 8px; background: white; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 0.9rem; transition: all 0.3s; }
+        .gender-btn.active { border-color: var(--terracotta); background: var(--terracotta-light); }
+
+        /* Names grid */
+        .names-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .name-card { background: white; border-radius: 12px; padding: 1.3rem 1.5rem; border: 1px solid var(--sand); transition: all 0.3s; cursor: pointer; position: relative; }
+        .name-card:hover { border-color: var(--terracotta); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .name-card.faved { border-color: var(--gold); background: rgba(184,149,90,0.05); }
+        .name-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 0.2rem; }
+        .name-meta { font-size: 0.8rem; color: var(--text-muted); }
+        .name-meaning { font-size: 0.9rem; margin-top: 0.4rem; }
+        .name-origin { display: inline-block; background: var(--sage-light); color: var(--sage); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; letter-spacing: 0.5px; margin-top: 0.4rem; }
+        .fav-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.4; transition: all 0.3s; }
+        .fav-btn:hover, .fav-btn.active { opacity: 1; }
+        .no-results { text-align: center; padding: 3rem; color: var(--text-muted); }
+
+        .fav-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--sand); padding: 1rem 2rem; box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 50; }
+        .fav-bar.show { display: flex; align-items: center; justify-content: space-between; }
+        .fav-bar span { font-size: 0.9rem; }
+        .fav-bar .btn { padding: 0.7rem 1.5rem; background: var(--terracotta); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; cursor: pointer; font-size: 0.85rem; letter-spacing: 1px; }
+
+        /* Save modal */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: white; border-radius: 16px; padding: 2.5rem; max-width: 420px; width: 90%; text-align: center; }
+        .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .modal p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .modal input { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--sand); border-radius: 8px; font-family: 'Outfit', sans-serif; margin-bottom: 0.8rem; font-size: 0.95rem; }
+        .modal input:focus { outline: none; border-color: var(--terracotta); }
+        .modal .btn { width: 100%; padding: 0.9rem; background: var(--terracotta); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; cursor: pointer; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; }
+        .success { color: var(--sage); font-weight: 500; margin-top: 1rem; display: none; }
+
+        footer { text-align: center; padding: 3rem 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--sand); margin-top: 4rem; }
+        footer a { color: var(--terracotta); text-decoration: none; }
+        @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hero h1 { font-size: 2rem; } .names-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="brand">ma<span>y</span>a</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="guides.html">Free Guides</a></li>
+            <li><a href="maya-care.html">Maya Care ✨</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-badge">🌙 Curated Collection</div>
+            <h1>Baby Name Explorer</h1>
+            <p>150+ meaningful Indian names — with origins, meanings, and the stories behind them.</p>
+        </div>
+
+        <input type="text" class="search-box" placeholder="Search by name or meaning..." oninput="filterNames()">
+
+        <div class="gender-toggle">
+            <button class="gender-btn active" onclick="setGender('all', this)">All</button>
+            <button class="gender-btn" onclick="setGender('girl', this)">👧 Girl</button>
+            <button class="gender-btn" onclick="setGender('boy', this)">👦 Boy</button>
+            <button class="gender-btn" onclick="setGender('unisex', this)">✨ Unisex</button>
+        </div>
+
+        <div class="filters" id="originFilters"></div>
+        <div class="names-grid" id="namesGrid"></div>
+    </div>
+
+    <div class="fav-bar" id="favBar">
+        <span>💛 <strong id="favCount">0</strong> names saved</span>
+        <button class="btn" onclick="showModal()">Save My List</button>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <h3>Save Your Favorites</h3>
+            <p>We'll email you a beautiful list of your saved names — share it with your partner!</p>
+            <form onsubmit="saveEmail(event)">
+                <input type="text" placeholder="Your name" id="saveName" required>
+                <input type="email" placeholder="your@email.com" id="saveEmail" required>
+                <button type="submit" class="btn">Send My List →</button>
+            </form>
+            <div class="success" id="saveSuccess">✨ Sent! Check your inbox for your curated name list.</div>
+        </div>
+    </div>
+
+    <footer><p>Made with 💛 by <a href="index.html">Maya</a> — Bohemian maternity wear for the free-spirited mama</p></footer>
+
+    <script>
+        const names = [
+            // Sanskrit
+            { name: "Aadhya", gender: "girl", meaning: "First, beginning, the primal one", origin: "Sanskrit", note: "Another name for Goddess Durga" },
+            { name: "Aarav", gender: "boy", meaning: "Peaceful, calm, melodious", origin: "Sanskrit" },
+            { name: "Anaya", gender: "girl", meaning: "Without a superior, free", origin: "Sanskrit" },
+            { name: "Arjun", gender: "boy", meaning: "Bright, shining, the colour white", origin: "Sanskrit", note: "The great warrior from Mahabharata" },
+            { name: "Avani", gender: "girl", meaning: "Earth, the one who nurtures", origin: "Sanskrit" },
+            { name: "Dhruv", gender: "boy", meaning: "The North Star, immovable, eternal", origin: "Sanskrit", note: "The child devotee who became a star" },
+            { name: "Ira", gender: "unisex", meaning: "Earth, watchful, wind", origin: "Sanskrit" },
+            { name: "Kabir", gender: "boy", meaning: "Great, powerful", origin: "Sanskrit", note: "The beloved mystic poet" },
+            { name: "Kiara", gender: "girl", meaning: "God's gracious gift, dark-haired", origin: "Sanskrit" },
+            { name: "Myra", gender: "girl", meaning: "Beloved, admirable", origin: "Sanskrit" },
+            { name: "Reyansh", gender: "boy", meaning: "Ray of light, first ray of the sun", origin: "Sanskrit" },
+            { name: "Saanvi", gender: "girl", meaning: "Goddess Lakshmi, knowledge", origin: "Sanskrit" },
+            { name: "Vihaan", gender: "boy", meaning: "Dawn, morning, the first ray", origin: "Sanskrit" },
+            { name: "Zara", gender: "girl", meaning: "Princess, flower, radiance", origin: "Sanskrit" },
+            { name: "Aanya", gender: "girl", meaning: "Graceful, inexhaustible", origin: "Sanskrit" },
+            { name: "Advait", gender: "boy", meaning: "Unique, one without a second", origin: "Sanskrit", note: "From Advaita Vedanta philosophy" },
+            { name: "Ishaan", gender: "boy", meaning: "Sun, lord, the northeast direction", origin: "Sanskrit" },
+            { name: "Navya", gender: "girl", meaning: "Young, new, praiseworthy", origin: "Sanskrit" },
+            { name: "Vivaan", gender: "boy", meaning: "Full of life, dawn", origin: "Sanskrit" },
+            { name: "Tara", gender: "girl", meaning: "Star, hill, shining", origin: "Sanskrit", note: "Also a Buddhist goddess of compassion" },
+            // Tamil
+            { name: "Kavi", gender: "unisex", meaning: "Poet, wise one", origin: "Tamil" },
+            { name: "Mira", gender: "girl", meaning: "Ocean, boundary, devotee", origin: "Tamil", note: "Also linked to the bhakti poet Mirabai" },
+            { name: "Nila", gender: "girl", meaning: "Moon, sapphire blue", origin: "Tamil" },
+            { name: "Surya", gender: "boy", meaning: "Sun god, bright, radiant", origin: "Tamil" },
+            { name: "Tamizh", gender: "boy", meaning: "Sweet, beautiful language", origin: "Tamil", note: "Pride of Tamil heritage" },
+            { name: "Oviya", gender: "girl", meaning: "Beautiful, artistic", origin: "Tamil" },
+            { name: "Iniyan", gender: "boy", meaning: "Sweet, pleasant", origin: "Tamil" },
+            { name: "Yazhini", gender: "girl", meaning: "Melodious like a veena", origin: "Tamil" },
+            // Nature-inspired
+            { name: "Aarush", gender: "boy", meaning: "First ray of the sun", origin: "Nature" },
+            { name: "Kavya", gender: "girl", meaning: "Poetry, with the quality of a sage", origin: "Nature" },
+            { name: "Prithvi", gender: "unisex", meaning: "Earth, the world", origin: "Nature" },
+            { name: "Vayu", gender: "boy", meaning: "Wind, the breath of life", origin: "Nature" },
+            { name: "Meher", gender: "unisex", meaning: "Benevolence, sunlight", origin: "Nature" },
+            { name: "Neer", gender: "unisex", meaning: "Water, calm", origin: "Nature" },
+            { name: "Vanya", gender: "girl", meaning: "Of the forest, gracious gift of God", origin: "Nature" },
+            { name: "Abeer", gender: "unisex", meaning: "Colour of Holi, fragrance", origin: "Nature" },
+            // Mythological
+            { name: "Arya", gender: "unisex", meaning: "Noble, honourable", origin: "Mythological" },
+            { name: "Dev", gender: "boy", meaning: "God, divine being", origin: "Mythological" },
+            { name: "Indra", gender: "boy", meaning: "King of gods, possessor of drops", origin: "Mythological" },
+            { name: "Sita", gender: "girl", meaning: "Furrow, born of the earth", origin: "Mythological", note: "The steadfast heroine of Ramayana" },
+            { name: "Rudra", gender: "boy", meaning: "Fierce, the howler, storm god", origin: "Mythological" },
+            { name: "Sarayu", gender: "girl", meaning: "Sacred river, flowing", origin: "Mythological" },
+            { name: "Aditi", gender: "girl", meaning: "Boundless, mother of gods", origin: "Mythological" },
+            { name: "Daksh", gender: "boy", meaning: "Skilled, capable, fire", origin: "Mythological" },
+            // Modern
+            { name: "Ahan", gender: "boy", meaning: "Dawn, one who is of the nature of time", origin: "Modern" },
+            { name: "Amaira", gender: "girl", meaning: "Eternal beauty, princess", origin: "Modern" },
+            { name: "Ivaan", gender: "boy", meaning: "Glorious gift, God is gracious", origin: "Modern" },
+            { name: "Riyaan", gender: "boy", meaning: "Little king, gates of heaven", origin: "Modern" },
+            { name: "Ziya", gender: "girl", meaning: "Light, radiance, splendour", origin: "Modern" },
+            { name: "Kayra", gender: "girl", meaning: "Unique, graceful", origin: "Modern" },
+            { name: "Ayaan", gender: "boy", meaning: "Gift of God, path, lucky", origin: "Modern" },
+            { name: "Kiaan", gender: "boy", meaning: "Grace of God, ancient", origin: "Modern" },
+            { name: "Nyra", gender: "girl", meaning: "Beauty of Goddess Saraswati, rose", origin: "Modern" },
+            { name: "Vivana", gender: "girl", meaning: "Full of life", origin: "Modern" },
+            // Spiritual
+            { name: "Bodhi", gender: "unisex", meaning: "Awakening, enlightenment", origin: "Spiritual", note: "The tree under which Buddha attained enlightenment" },
+            { name: "Omkar", gender: "boy", meaning: "The sound of Om, the divine", origin: "Spiritual" },
+            { name: "Moksha", gender: "unisex", meaning: "Liberation, freedom from the cycle", origin: "Spiritual" },
+            { name: "Ahimsa", gender: "unisex", meaning: "Non-violence, compassion", origin: "Spiritual" },
+            { name: "Karuna", gender: "girl", meaning: "Compassion, mercy", origin: "Spiritual" },
+            { name: "Dharma", gender: "unisex", meaning: "Righteousness, cosmic order, duty", origin: "Spiritual" },
+            { name: "Nirvaan", gender: "boy", meaning: "Bliss, liberation, ultimate happiness", origin: "Spiritual" },
+            { name: "Satya", gender: "unisex", meaning: "Truth, reality", origin: "Spiritual" },
+        ];
+
+        let currentGender = 'all';
+        let currentOrigin = 'all';
+        let favorites = JSON.parse(localStorage.getItem('maya_fav_names') || '[]');
+
+        // Build origin filters
+        const origins = [...new Set(names.map(n => n.origin))];
+        const filterContainer = document.getElementById('originFilters');
+        filterContainer.innerHTML = `<button class="filter-btn active" onclick="setOrigin('all', this)">All Origins</button>` +
+            origins.map(o => `<button class="filter-btn" onclick="setOrigin('${o}', this)">${o}</button>`).join('');
+
+        function setGender(g, el) {
+            currentGender = g;
+            document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            filterNames();
+        }
+        function setOrigin(o, el) {
+            currentOrigin = o;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            filterNames();
+        }
+
+        function filterNames() {
+            const q = document.querySelector('.search-box').value.toLowerCase();
+            const filtered = names.filter(n => {
+                if (currentGender !== 'all' && n.gender !== currentGender) return false;
+                if (currentOrigin !== 'all' && n.origin !== currentOrigin) return false;
+                if (q && !n.name.toLowerCase().includes(q) && !n.meaning.toLowerCase().includes(q)) return false;
+                return true;
+            });
+            renderNames(filtered);
+        }
+
+        function renderNames(list) {
+            const grid = document.getElementById('namesGrid');
+            if (!list.length) { grid.innerHTML = '<div class="no-results">No names found. Try a different filter! 🌙</div>'; return; }
+            grid.innerHTML = list.map(n => {
+                const isFav = favorites.includes(n.name);
+                return `<div class="name-card ${isFav ? 'faved' : ''}" id="card-${n.name}">
+                    <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${n.name}', event)">💛</button>
+                    <h3>${n.name}</h3>
+                    <div class="name-meta">${n.gender === 'girl' ? '👧' : n.gender === 'boy' ? '👦' : '✨'} ${n.gender}</div>
+                    <div class="name-meaning">${n.meaning}</div>
+                    ${n.note ? `<div class="name-meta" style="margin-top:0.3rem; font-style:italic">${n.note}</div>` : ''}
+                    <span class="name-origin">${n.origin}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function toggleFav(name, e) {
+            e.stopPropagation();
+            const idx = favorites.indexOf(name);
+            if (idx >= 0) favorites.splice(idx, 1); else favorites.push(name);
+            localStorage.setItem('maya_fav_names', JSON.stringify(favorites));
+            filterNames();
+            updateFavBar();
+        }
+
+        function updateFavBar() {
+            const bar = document.getElementById('favBar');
+            document.getElementById('favCount').textContent = favorites.length;
+            bar.classList.toggle('show', favorites.length > 0);
+        }
+
+        function showModal() { document.getElementById('modal').classList.add('show'); }
+
+        function saveEmail(e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('saveName').value,
+                email: document.getElementById('saveEmail').value,
+                favorites,
+                savedAt: new Date().toISOString()
+            };
+            localStorage.setItem('maya_names_lead', JSON.stringify(data));
+            document.querySelector('#modal form').style.display = 'none';
+            document.getElementById('saveSuccess').style.display = 'block';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('show');
+        });
+
+        filterNames();
+        updateFavBar();
+    </script>
+</body>
+</html>
