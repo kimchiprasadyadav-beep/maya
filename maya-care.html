@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya Care — Your AI Maternal Health Companion</title>
+    <meta name="description" content="Maya Care — AI-powered maternal health companion. Guidance, support, and celebration through every stage of your journey.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap');
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream: #FAF6F1;
+            --warm-white: #FFF9F2;
+            --sand: #E8DDD3;
+            --terracotta: #C4774C;
+            --terracotta-light: rgba(196, 119, 76, 0.1);
+            --sage: #8B9E7E;
+            --sage-light: rgba(139, 158, 126, 0.1);
+            --charcoal: #2C2C2C;
+            --text: #3D3530;
+            --text-muted: #8B7E74;
+            --gold: #B8955A;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        ::selection { background: var(--terracotta); color: white; }
+        img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+        /* Announcement */
+        .announcement { background: var(--charcoal); color: var(--sand); text-align: center; padding: 0.6rem; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Nav */
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 246, 241, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand); padding: 1rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+        .brand span { color: var(--terracotta); }
+        .nav-icons { display: flex; gap: 1.5rem; font-size: 1.1rem; }
+        .nav-icons a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-icons a:hover { color: var(--terracotta); }
+
+        /* Hero */
+        .care-hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+        }
+        .ai-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--terracotta-light); color: var(--terracotta);
+            font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+            padding: 0.5rem 1.2rem; border-radius: 100px; margin-bottom: 2rem;
+        }
+        .ai-badge::before { content: '✦'; }
+        .care-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.2;
+            max-width: 700px; margin: 0 auto 1.5rem;
+        }
+        .care-hero h1 em { font-style: italic; color: var(--terracotta); }
+        .care-hero .subtitle {
+            font-size: 1.05rem; color: var(--text-muted); max-width: 550px;
+            margin: 0 auto 2.5rem; line-height: 1.8;
+        }
+        .btn {
+            display: inline-block; padding: 1rem 2.5rem; font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+            border: 1.5px solid var(--charcoal); color: var(--charcoal); background: transparent;
+            cursor: pointer; transition: all 0.4s ease; width: fit-content;
+        }
+        .btn:hover { background: var(--charcoal); color: var(--cream); }
+        .btn-filled { background: var(--terracotta); border-color: var(--terracotta); color: white; }
+        .btn-filled:hover { background: #B06942; border-color: #B06942; }
+        .btn-large { padding: 1.2rem 3rem; font-size: 0.85rem; }
+
+        /* Stages */
+        .stages { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        .section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1rem; }
+        .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; }
+        .stages-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .stage-card {
+            text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--sand);
+            border-radius: 12px; transition: all 0.3s;
+        }
+        .stage-card:hover { border-color: var(--terracotta); transform: translateY(-4px); }
+        .stage-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .stage-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.6rem; }
+        .stage-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* Features */
+        .features { background: var(--warm-white); padding: 5rem 2rem; }
+        .features-inner { max-width: 1100px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .feature-card {
+            display: flex; gap: 1.5rem; padding: 2rem;
+            background: var(--cream); border-radius: 12px; transition: transform 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-3px); }
+        .feature-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 0.2rem; }
+        .feature-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* Quote Banner */
+        .quote-banner {
+            background: var(--charcoal); color: var(--sand); padding: 4rem 2rem; text-align: center;
+        }
+        .quote-banner blockquote {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+            font-style: italic; font-weight: 300; line-height: 1.6;
+            max-width: 600px; margin: 0 auto 1rem;
+        }
+        .quote-banner .attr { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--terracotta); }
+
+        /* Privacy */
+        .privacy { padding: 5rem 2rem; max-width: 800px; margin: 0 auto; text-align: center; }
+        .privacy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem; }
+        .privacy-item { padding: 1.5rem; }
+        .privacy-item .icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .privacy-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .privacy-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--terracotta-light), var(--sage-light));
+            padding: 5rem 2rem; text-align: center;
+        }
+        .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; margin-bottom: 1rem; }
+        .cta-section p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; max-width: 450px; margin-left: auto; margin-right: auto; }
+
+        /* Disclaimer */
+        .disclaimer {
+            text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--text-muted);
+            max-width: 600px; margin: 0 auto; line-height: 1.7;
+            border-top: 1px solid var(--sand);
+        }
+
+        /* Footer */
+        footer { background: var(--charcoal); color: var(--sand); padding: 4rem 2rem 2rem; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--terracotta); }
+        .footer-tagline { font-size: 0.85rem; color: rgba(232, 221, 211, 0.6); line-height: 1.7; }
+        footer h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; color: var(--terracotta); }
+        footer ul { list-style: none; }
+        footer li { margin-bottom: 0.6rem; }
+        footer a { color: rgba(232, 221, 211, 0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        footer a:hover { color: var(--sand); }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(232, 221, 211, 0.1); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(232, 221, 211, 0.4); }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: none; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .stages-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+            .privacy-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .stages-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="announcement">
+        Meet Maya Care — Your AI companion through every stage of motherhood ✨
+    </div>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="sustainability.html">Values</a></li>
+            <li><a href="faq.html">Help</a></li>
+            <li><a href="maya-care.html" class="active">Maya Care ✨</a></li>
+        </ul>
+        <a href="index.html" class="brand">ma<span>ya</span></a>
+        <div class="nav-icons">
+            <a href="#" title="Search">🔍</a>
+            <a href="#" title="Account">👤</a>
+            <a href="#" title="Cart">🛒</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="care-hero">
+        <div class="ai-badge">AI-Powered Companion</div>
+        <h1>Your gentle guide through <em>every stage</em> of motherhood</h1>
+        <p class="subtitle">
+            Guidance, support, and celebration — from trying to conceive through the toddler years. 
+            Always here, always understanding, always you.
+        </p>
+        <a href="https://maya-care-gilt.vercel.app" class="btn btn-filled btn-large" target="_blank">
+            Start a Conversation →
+        </a>
+    </section>
+
+    <!-- Quote -->
+    <div class="quote-banner">
+        <blockquote>"No question is too small, no feeling too big. Maya Care is here for all of it."</blockquote>
+        <div class="attr">— The Maya Care Promise</div>
+    </div>
+
+    <!-- Stages -->
+    <section class="stages fade-in">
+        <div class="section-header">
+            <div class="section-label">Every Chapter</div>
+            <h2>With You at Every Stage</h2>
+        </div>
+        <div class="stages-grid">
+            <div class="stage-card">
+                <div class="stage-icon">🌙</div>
+                <h3>Trying to Conceive</h3>
+                <p>Fertility guidance, cycle tracking support, and emotional encouragement on your journey to motherhood.</p>
+            </div>
+            <div class="stage-card">
+                <div class="stage-icon">🌸</div>
+                <h3>Pregnant</h3>
+                <p>Week-by-week insights, symptom support, nutrition guidance, and preparation for the big day.</p>
+            </div>
+            <div class="stage-card">
+                <div class="stage-icon">🤱</div>
+                <h3>Postpartum</h3>
+                <p>Recovery support, breastfeeding help, newborn care tips, and gentle check-ins on how <em>you</em> are doing.</p>
+            </div>
+            <div class="stage-card">
+                <div class="stage-icon">🦋</div>
+                <h3>Toddler Mom</h3>
+                <p>Developmental milestones, sleep guidance, toddler nutrition, and the solidarity every mama needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="features-inner fade-in">
+            <div class="section-header">
+                <div class="section-label">What Makes It Special</div>
+                <h2>Care That Understands</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🕐</div>
+                    <div>
+                        <h3>24/7 AI Support</h3>
+                        <p>3 AM feeding questions? Sunday anxiety spirals? Maya Care is always awake, always patient, always here.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div>
+                        <h3>Personalized Guidance</h3>
+                        <p>Knows your stage, remembers your context, and adapts to your unique journey — no generic advice here.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <div>
+                        <h3>Evidence-Based Information</h3>
+                        <p>Grounded in current maternal health research and best practices. Trustworthy answers when you need them most.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💛</div>
+                    <div>
+                        <h3>Emotional Support</h3>
+                        <p>More than facts — Maya Care holds space for your feelings, validates your experiences, and celebrates your wins.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy & Safety -->
+    <section class="privacy fade-in">
+        <div class="section-header">
+            <div class="section-label">Trust & Safety</div>
+            <h2>Your Privacy, Our Priority</h2>
+        </div>
+        <div class="privacy-grid">
+            <div class="privacy-item">
+                <div class="icon">🔒</div>
+                <h3>Private & Secure</h3>
+                <p>Your conversations are encrypted and never shared. What you share with Maya Care stays with Maya Care.</p>
+            </div>
+            <div class="privacy-item">
+                <div class="icon">🛡️</div>
+                <h3>Safe Boundaries</h3>
+                <p>Built-in safety protocols for emergencies. Maya Care will always guide you to professional help when needed.</p>
+            </div>
+            <div class="privacy-item">
+                <div class="icon">💚</div>
+                <h3>Judgment-Free</h3>
+                <p>No question is silly, no worry too small. A safe space to be honest about how you're really feeling.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="section-label">Ready?</div>
+        <h2>Start Your Conversation</h2>
+        <p>Whether you're just curious or need support right now — Maya Care is here, and she's ready to listen.</p>
+        <a href="https://maya-care-gilt.vercel.app" class="btn btn-filled btn-large" target="_blank">
+            Talk to Maya Care →
+        </a>
+    </section>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+        <p>Maya Care provides general wellness information and emotional support. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult your healthcare provider for medical concerns.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">ma<span>ya</span></div>
+                <p class="footer-tagline">Bohemian maternity wear rooted in Indian craft. For the free-spirited mama who refuses to blend in.</p>
+            </div>
+            <div>
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Products</a></li>
+                    <li><a href="shop.html#dresses">Dresses</a></li>
+                    <li><a href="shop.html#tops">Tops & Kurtis</a></li>
+                    <li><a href="shop.html#coords">Co-ord Sets</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="sustainability.html">Sustainability</a></li>
+                    <li><a href="maya-care.html">Maya Care</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="faq.html#shipping">Shipping & Returns</a></li>
+                    <li><a href="care-guide.html">Care Guide</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Maya. All rights reserved.</span>
+            <span>Made with 🌿 in India</span>
+        </div>
+    </footer>
+
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        fadeEls.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
